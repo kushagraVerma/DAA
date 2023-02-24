@@ -1,6 +1,12 @@
 #ifndef DCEL_HPP
 #define DCEL_HPP
 
+#include <vector>
+
+using namespace std;
+
+#define toCoord(v) v->x, v->y
+
 class Edge;
 class Face{
     public:
@@ -16,16 +22,11 @@ class Vertex{
         Vertex(double _x, double _y){
             x = _x; y = _y;
         }
-        Edge* edgeTo(Vertex* v){
-            return (inc_edge = new Edge(this,v));
-        }
+        Edge* edgeTo(Vertex* v);
         bool isInc(Edge* e){
             return e==inc_edge;
         }
-        void clearEdge(){
-            delete inc_edge;
-            inc_edge = nullptr;
-        }
+        void clearEdge();
         static Vertex* midpoint(Vertex* a, Vertex* b){
             double xm = (a->x + b->x)/2;
             double ym = (a->y + b->y)/2;
@@ -71,6 +72,7 @@ class Edge{
             v->edgeTo(dst);
             v->inc_edge->setNext(next);
             setNext(v->inc_edge);
+            return v->inc_edge;
         }
         Edge* split(){
             Vertex* mp = Vertex::midpoint(org,dest());
@@ -93,6 +95,14 @@ class Edge{
         }
 };
 
+Edge* Vertex::edgeTo(Vertex* v){
+    return (inc_edge = new Edge(this,v));
+}
+void Vertex::clearEdge(){
+    delete inc_edge;
+    inc_edge = nullptr;
+}
+
 class DCEL{
     private:
         void addVert(Vertex* v){
@@ -114,14 +124,25 @@ class DCEL{
             last = start;
             n = 1;
         }
-        DCEL(int _n, Vertex** vlist) : DCEL(vlist[0]){
-            for(int i = 1; i < _n; i++){
-                addVert(vlist[i]);
+        DCEL(vector<Vertex*> vlist) : DCEL(vlist[0]){
+            int _n = vlist.size();
+            if(_n>1){
+                for(int i = 1; i < _n; i++){
+                    addVert(vlist[i]);
+                }
+                Edge* e = last->inc_edge; //...<-e-last
+                last->edgeTo(start);//...<-e-last--->start
+                e->twin->setNext(last->inc_edge);
+                last->inc_edge->setNext(start->inc_edge);
             }
-            Edge* e = last->inc_edge; //...<-e-last
-            last->edgeTo(start);//...<-e-last--->start
-            e->twin->setNext(last->inc_edge);
-            last->inc_edge->setNext(start->inc_edge);
+        }
+        void foreachVert(void func(Vertex*)){
+            Vertex* curr = start;
+            do{
+                func(curr);
+                if(curr->inc_edge && curr->inc_edge->next) 
+                    curr = curr->inc_edge->next->org;
+            }while(curr!=start);
         }
 };
 
