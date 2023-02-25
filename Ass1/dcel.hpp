@@ -28,8 +28,15 @@ class Vertex{
         }
         void clearEdge();
         static Vertex* midpoint(Vertex* a, Vertex* b){
-            double xm = (a->x + b->x)/2;
-            double ym = (a->y + b->y)/2;
+            vector<Vertex*> vlist = {a,b};
+            return centroid(vlist);
+        }
+        static Vertex* centroid(vector<Vertex*> &vlist){
+            double xm = 0, ym = 0;
+            for(auto v : vlist){
+                xm+=v->x; ym+=v->y;
+            }
+            xm/=vlist.size(); ym/=vlist.size();
             return new Vertex(xm,ym);
         }
 };
@@ -124,7 +131,7 @@ class DCEL{
             last = start;
             n = 1;
         }
-        DCEL(vector<Vertex*> vlist) : DCEL(vlist[0]){
+        DCEL(vector<Vertex*> &vlist) : DCEL(vlist[0]){
             int _n = vlist.size();
             if(_n>1){
                 for(int i = 1; i < _n; i++){

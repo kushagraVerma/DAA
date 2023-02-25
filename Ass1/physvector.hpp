@@ -9,8 +9,13 @@ class PVect{
     private:
         double x = 0.0, y = 0.0, m = 0.0, a = 0.0;
         void update(){
-            m = mag();
-            a = heading();
+            m = sqrt(x*x+y*y);
+            if(m==0){
+                a = INFINITY;
+                return;
+            }
+            a = (y>=0? acos(x/m) : 2*PI - acos(x/m));
+            if(a==2*PI) a = 0;
         }
     public:
         PVect(double _x, double _y){
@@ -21,12 +26,11 @@ class PVect{
         void getXY(double& _x, double& _y){
             _x = x; _y = y;
         }
-        double mag(){
-            return sqrt(x*x+y*y);
+        double getM(){
+            return m;
         }
-        double heading(){
-            if(m==0) return INFINITY;
-            return (y>0? acos(x/m) : 2*PI - acos(x/m));
+        double getA(){
+            return a;
         }
         static double toDeg(double theta){
             return theta*180/PI;
@@ -35,7 +39,7 @@ class PVect{
             return theta*PI/180;
         }
         static double angleBetween(PVect from, PVect to){
-            double ta = to.heading(), fa = from.heading();
+            double ta = to.a, fa = from.a;
             if(ta==INFINITY || fa==INFINITY) return INFINITY;
             double theta = ta - fa;
             if(theta<0) theta+=2*PI;
