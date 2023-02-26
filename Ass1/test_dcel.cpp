@@ -15,23 +15,23 @@ double roundTo(double x, int exp = PREC){
 
 vector<Vertex*> fill1(int N){
     vector<Vertex*> vlist(N,nullptr);
-    PVect pv(1,0);
+    PhysicalVector physicalVector(1,0);
     double x,y;
     for(auto &v : vlist){
-        pv.getXY(x,y);
+        physicalVector.getXY(x,y);
         v = new Vertex(roundTo(x),roundTo(y));
-        pv.rotate(2*PI/N);
+        physicalVector.rotate(2*PI/N);
     }
     return vlist;
 }
 vector<Vertex*> fill2(int N){
     vector<Vertex*> vlist(N,nullptr);
-    PVect pv(-1,0);
+    PhysicalVector physicalVector(-1,0);
     double x,y;
     for(auto &v : vlist){
-        pv.getXY(x,y);
+        physicalVector.getXY(x,y);
         v = new Vertex(roundTo(x),roundTo(y));
-        pv.rotate(2*PI/N);
+        physicalVector.rotate(2*PI/N);
     }
     return vlist;
 }
@@ -39,9 +39,9 @@ vector<Vertex*> fill2(int N){
 void sortCCW(vector<Vertex*> &vlist){
     Vertex* cent = Vertex::centroid(vlist);
     sort(vlist.begin(),vlist.end(),[&cent](Vertex* a, Vertex* b)->bool{
-        PVect va(toCoord(cent),toCoord(a)), vb(toCoord(cent),toCoord(b));
-        double aa = va.getA(), ba = vb.getA();
-        return (aa==ba?va.getM()<vb.getM():aa<ba);
+        PhysicalVector va(toCoord(cent),toCoord(a)), vb(toCoord(cent),toCoord(b));
+        double aa = va.getAngle(), ba = vb.getAngle();
+        return (aa==ba?va.getMagnitude()<vb.getMagnitude():aa<ba);
     });
 }
 
@@ -51,8 +51,9 @@ void printVlist(vector<Vertex*> &vlist, bool centAng = true){
     for(auto v : vlist){
         cout << "(" << v->x << "," << v->y << ")@";
         if(centAng) 
-            cout << PVect::toDeg((PVect(toCoord(cent),toCoord(v))).getA()) << " ";
+            cout << PhysicalVector::toDegree((PhysicalVector(toCoord(cent),toCoord(v))).getAngle()) << " ";
     }
+    delete cent;
     cout << "}" << endl;
 }
 
@@ -75,32 +76,32 @@ int main(){
 
     DCEL dcel(vlist);
     dcel.foreachVert([](Vertex* v){
-        cout << PVect::toDeg(PVect(toCoord(v)).getA()) << " : ";
+        cout << PhysicalVector::toDegree(PhysicalVector(toCoord(v)).getAngle()) << " : ";
         cout << v->x << " " << v->y << endl;
     });
     cout << endl;
 
-    PVect pvs[] = {
-        PVect(0,1),
-        PVect(0,1,1,2),
-        PVect(-1,0),
-        PVect(0,-1),
-        PVect(-1,-1)
+    PhysicalVector physicalVectors[] = {
+        PhysicalVector(0,1),
+        PhysicalVector(0,1,1,2),
+        PhysicalVector(-1,0),
+        PhysicalVector(0,-1),
+        PhysicalVector(-1,-1)
     };
-    for(auto pv : pvs){
-        cout << pv.getM() << "@" << PVect::toDeg(pv.getA()) << ", ";
+    for(auto physicalVector : physicalVectors){
+        cout << physicalVector.getMagnitude() << "@" << PhysicalVector::toDegree(physicalVector.getAngle()) << ", ";
     }
     cout << endl;
     
     double angles[] = {
-        PVect::angleBetween(PVect(1,1,0,0),PVect(-1,0)),
-        PVect::angleBetween(-1,-1,0,0,1,1),
-        PVect::angleBetween(0,-1,1,0,0,1),
-        PVect::angleBetween(0,1,0,0,1,1),
-        PVect::angleBetween(0,-1,0,1,0,0)
+        PhysicalVector::angleBetween(PhysicalVector(1,1,0,0),PhysicalVector(-1,0)),
+        PhysicalVector::angleBetween(-1,-1,0,0,1,1),
+        PhysicalVector::angleBetween(0,-1,1,0,0,1),
+        PhysicalVector::angleBetween(0,1,0,0,1,1),
+        PhysicalVector::angleBetween(0,-1,0,1,0,0)
     };
     for(auto angle : angles){
-        cout << PVect::toDeg(angle) << ", ";
+        cout << PhysicalVector::toDegree(angle) << ", ";
     }
     cout << endl;
 

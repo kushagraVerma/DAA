@@ -5,74 +5,74 @@
 
 const double PI = acos(-1);
 
-class PVect{
+class PhysicalVector{
     private:
-        double x = 0.0, y = 0.0, m = 0.0, a = 0.0;
+        double x = 0.0, y = 0.0, magnitude = 0.0, angle = 0.0;
         void update(){
-            m = sqrt(x*x+y*y);
-            if(m==0){
-                a = INFINITY;
+            magnitude = sqrt(x * x + y * y);
+            if(magnitude == 0){
+                angle = INFINITY;
                 return;
             }
-            a = (y>=0? acos(x/m) : 2*PI - acos(x/m));
-            if(a==2*PI) a = 0;
+            angle = (y >= 0 ? acos(x / magnitude) : 2 * PI - acos(x / magnitude));
+            if(angle == (2 * PI)) angle = 0;
         }
     public:
-        PVect(double _x, double _y){
+        PhysicalVector(double _x, double _y){
             x = _x; y = _y;
             update();
         }
-        PVect(double x1, double y1, double x2, double y2) : PVect(x2-x1,y2-y1){}
+        PhysicalVector(double x1, double y1, double x2, double y2) : PhysicalVector(x2 - x1, y2 - y1){}
         void getXY(double& _x, double& _y){
             _x = x; _y = y;
         }
-        double getM(){
-            return m;
+        double getMagnitude(){
+            return magnitude;
         }
-        double getA(){
-            return a;
+        double getAngle(){
+            return angle;
         }
-        static double toDeg(double theta){
-            return theta*180/PI;
+        static double toDegree(double theta){
+            return (theta * 180) / PI;
         }
-        static double toRad(double theta){
-            return theta*PI/180;
+        static double toRadian(double theta){
+            return (theta * PI) / 180;
         }
-        static double angleBetween(PVect from, PVect to){
-            double ta = to.a, fa = from.a;
-            if(ta==INFINITY || fa==INFINITY) return INFINITY;
-            double theta = ta - fa;
-            if(theta<0) theta+=2*PI;
+        static double angleBetween(PhysicalVector from, PhysicalVector to){
+            double toAngle = to.angle, fromAngle = from.angle;
+            if(toAngle == INFINITY || fromAngle == INFINITY) return INFINITY;
+            double theta = toAngle - fromAngle;
+            if(theta < 0) theta += 2 * PI;
             return theta;
         }
         static double angleBetween(double x1, double y1, double x2, double y2, double x3, double y3){
-            PVect from(x2,y2,x1,y1), to(x2,y2,x3,y3);
-            return angleBetween(from,to);
+            PhysicalVector from(x2, y2, x1 ,y1), to(x2, y2, x3, y3);
+            return angleBetween(from, to);
         }
-        PVect rotated(double theta){
-            if(a==INFINITY) return *this;
-            double a_ = a+theta;
-            return PVect(m*cos(a_),m*sin(a_));
+        PhysicalVector rotated(double theta){
+            if(angle == INFINITY) return *this;
+            double a_ = angle + theta;
+            return PhysicalVector(magnitude * cos(a_), magnitude * sin(a_));
         }
         void rotate(double theta){
             *this = rotated(theta);
         }
-        PVect operator + (PVect pv){
-            return PVect(x+pv.x,y+pv.y);
+        PhysicalVector operator + (PhysicalVector physicalVector){
+            return PhysicalVector(x + physicalVector.x, y + physicalVector.y);
         }
-        PVect operator * (double f){
-            return PVect(x*f,y*f);
+        PhysicalVector operator * (double factor){
+            return PhysicalVector(x * factor, y * factor);
         }
-        PVect operator = (PVect pv){
-            x = pv.x; y = pv.y;
+        PhysicalVector operator = (PhysicalVector physicalVector){
+            x = physicalVector.x; y = physicalVector.y;
             update();
             return *this;
         }
-        PVect operator += (PVect pv){
-            return ((*this) = (*this) + pv);
+        PhysicalVector operator += (PhysicalVector physicalVector){
+            return ((*this) = (*this) + physicalVector);
         }
-        PVect operator *= (double f){
-            return ((*this) = (*this) * f);
+        PhysicalVector operator *= (double factor){
+            return ((*this) = (*this) * factor);
         }
 };
 

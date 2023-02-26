@@ -1,11 +1,12 @@
 #ifndef DCEL_HPP
 #define DCEL_HPP
 
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 #define toCoord(v) v->x, v->y
+#define vpvect vector<Vertex*>
 
 class Edge;
 class Face{
@@ -38,6 +39,9 @@ class Vertex{
             }
             xm/=vlist.size(); ym/=vlist.size();
             return new Vertex(xm,ym);
+        }
+        static bool coincides(Vertex* a, Vertex* b){
+            return (a->x == b->x && a->y == b->y);
         }
 };
 class Edge{
@@ -131,7 +135,7 @@ class DCEL{
             last = start;
             n = 1;
         }
-        DCEL(vector<Vertex*> &vlist) : DCEL(vlist[0]){
+        DCEL(vpvect &vlist) : DCEL(vlist[0]){
             int _n = vlist.size();
             if(_n>1){
                 for(int i = 1; i < _n; i++){
