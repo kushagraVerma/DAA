@@ -131,7 +131,7 @@ int main() {
     sortCW1(vlist);
     
     vector<vector<Vertex*>> L(1,vector<Vertex*>(1,vlist[0]));
-    vector<vector<Vertex*>> finals(0);
+    vector<vector<Vertex*>> finalists(0);
     
     for (int m = 1; vlist.size() > 3; m++) {
         // cout << m << " vlist: "; printVlist(vlist);
@@ -201,24 +201,22 @@ int main() {
                             break;
                         }
                     } while(LPVS.size()>0);
-                    // cout << LPVS.size() << endl;
+                    // cout << "LPVS size: " << LPVS.size() << endl;
                     if (LPVS.size() > 0) {
                         vector<Vertex*> L_1(L[m]);
                         bool inside = false;
                         while (L_1.size() > 2 && !inside) {
-                            int sz = L_1.size();
-                            inside |= isInterior(LPVS[0], L_1[0], L_1[sz-1], L_1[sz-2]);
+                            inside |= isInterior(LPVS[0], L_1[0], L_1[L_1.size()-1], L_1[L_1.size()-2]);
                             L_1.pop_back();
                         }
                         if(inside){
-                            int sz = L_1.size();
                             while(
                                 L_1.size() > 2 
-                                && isInterior(LPVS[0], L_1[0], L_1[sz-1], L_1[sz-2])
+                                && isInterior(LPVS[0], L_1[0], L_1[L_1.size()-1], L_1[L_1.size()-2])
                             ){
                                 L_1.pop_back();
                             }
-                            // cout << "sz: " << L_1.size() << endl; 
+                            // cout << "L_1 size: " << L_1.size() << endl; 
                             L[m] = L_1;
                         }
                         Backward=true;
@@ -228,9 +226,9 @@ int main() {
             }
         }
         if (L[m].back() != vlist[1]) {
-            finals.push_back(L[m]);
+            finalists.push_back(L[m]);
             // cout << "FIN: ";
-            // for(auto l : finals){
+            // for(auto l : finalists){
             //     printVlist(l);
             // }
             // cout << endl;
@@ -252,7 +250,7 @@ int main() {
     }
 
     
-    for(auto l : finals){
+    for(auto l : finalists){
         printVlist(l);
     }
     printVlist(vlist);
