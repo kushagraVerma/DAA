@@ -5,18 +5,26 @@
 using namespace std;
 
 double area(double x1, double y1, double x2, double y2, double x3, double y3) {
-    return 0.5 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+    double ar = 0.5 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+    if(ar<0) ar*=-1;
+    return ar;
 }
 
 bool isInterior(Vertex* p, Vertex* a, Vertex* b, Vertex* c) {
+    // printf("p=(%lf,%lf) in a=(%lf,%lf), b=(%lf,%lf), c=(%lf,%lf)?\n",
+    //     toCoord(p), toCoord(a), toCoord(b), toCoord(c));
     double a1 = area(toCoord(p), toCoord(a), toCoord(b));
+	// printf("pab=%lf\n",a1);
     double a2 = area(toCoord(p), toCoord(b), toCoord(c));
+	// printf("pbc=%lf\n",a2);
     double a3 = area(toCoord(p), toCoord(a), toCoord(c));
+	// printf("pac=%lf\n",a3);
     double ar = area(toCoord(a), toCoord(b), toCoord(c));
+	// printf("abc=%lf\n",ar);
     return (ar == a1 + a2 + a3);
 }
-bool isInterior(Vertex* p, int xy[4]) {
-    return (p -> x < xy[0] || p -> x > xy[1] || p -> y < xy[2] || p -> y > xy[3]);
+bool isInterior(Vertex* p, int rect[4]) {
+    return (p -> x > rect[0] && p -> x < rect[1] && p -> y > rect[2] && p -> y < rect[3]);
 }
 
 void sortCW1(vector<Vertex*> &vlist){
@@ -50,24 +58,24 @@ void sortCW2(vector<Vertex*>&vlist) {
     });
 }
 
-void getBoundRect(vector<Vertex*> vlist, int _xy[4]){
-    int xy[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
+void getBoundRect(vector<Vertex*> vlist, int _rect[4]){
+    int rect[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
     for(int j = 0; j < vlist.size(); j++) {
-        if (xy[0] > vlist[j] -> x) {
-            xy[0] = vlist[j] -> x;
+        if (rect[0] > vlist[j] -> x) {
+            rect[0] = vlist[j] -> x;
         }
-        if (xy[1] < vlist[j] -> x){
-            xy[1] = vlist[j] -> x;
+        if (rect[1] < vlist[j] -> x){
+            rect[1] = vlist[j] -> x;
         }
-        if (xy[2] > vlist[j] -> y){
-            xy[2] = vlist[j] -> y;
+        if (rect[2] > vlist[j] -> y){
+            rect[2] = vlist[j] -> y;
         }
-        if (xy[3] < vlist[j] -> y){
-            xy[3] = vlist[j] -> y;
+        if (rect[3] < vlist[j] -> y){
+            rect[3] = vlist[j] -> y;
         }
     }
     for(int i = 0; i < 4; i++){
-        _xy[i] = xy[i];
+        _rect[i] = rect[i];
     }
 }
 
@@ -126,7 +134,7 @@ int main() {
     vector<vector<Vertex*>> finals(0);
     
     for (int m = 1; vlist.size() > 3; m++) {
-        printVlist(vlist);
+        // cout << m << " vlist: "; printVlist(vlist);
         // cout << m <<  " " << L[m - 1].size() << endl;
         Vertex* v1 = *L[m - 1].rbegin();
         Vertex* v2 = getNxt(vlist, v1);
@@ -145,13 +153,15 @@ int main() {
             L[m].push_back(vlist[i+1]);
             i++;
         }
-        // printVlist(L[m]);
+        // cout << "OG Lm: "; printVlist(L[m]);
         vector<Vertex*> notchlist;
         for(i = 0; i < vlist.size(); i++){
-            if (isReflex(vlist[i - 1], vlist[i], vlist[(i + 1) % vlist.size()])){
+            // cout << i << endl;
+            if (isReflex(vlist[(i - 1) % vlist.size()], vlist[i], vlist[(i + 1) % vlist.size()])){
                 notchlist.push_back(vlist[i]);
             }
         }
+        // printVlist(notchlist);
         if(L.size() != vlist.size()) {
             vector<Vertex*> LPVS;
             for (int j = 0; j < notchlist.size(); j++) {
@@ -167,9 +177,16 @@ int main() {
                 }
             }
             while (LPVS.size() > 0) {
+                // cout << "LPVS: "; printVlist(LPVS);
+                // cout << "Lm: "; printVlist(L[m]);
                 //xmin,xmax,ymin,ymax-->Rectangle
-                int xy[4];
-                getBoundRect(L[m],xy);
+                int rect[4];
+                getBoundRect(L[m],rect);
+                // cout << "rect: ";
+                // for(auto x : rect){
+                //     cout << x << " ";
+                // }
+                // cout << endl;
                 
                 bool Backward = false;
                 
@@ -177,25 +194,35 @@ int main() {
                     Vertex* tmp;
                     do {
                         tmp = LPVS.front();
-                        if (!isInterior(tmp,xy)) {
+                        // cout << "tmp: " << tmp->x << " " << tmp->y << endl;
+                        if (!isInterior(tmp,rect)) {
                             LPVS.erase(LPVS.begin());
+                        }else{
+                            break;
                         }
-                    } while(!isInterior(tmp,xy) && LPVS.size()>0);
+                    } while(LPVS.size()>0);
+                    // cout << LPVS.size() << endl;
                     if (LPVS.size() > 0) {
-                        vector<Vertex*> L_1;
-                        L_1 = L[m];
-                        while (L_1.size() > 2) {
-                            if (!isInterior(LPVS[0], L_1[0], *(--L_1.end()), *(--(--L_1.end())))) {
+                        vector<Vertex*> L_1(L[m]);
+                        bool inside = false;
+                        while (L_1.size() > 2 && !inside) {
+                            int sz = L_1.size();
+                            inside |= isInterior(LPVS[0], L_1[0], L_1[sz-1], L_1[sz-2]);
+                            L_1.pop_back();
+                        }
+                        if(inside){
+                            int sz = L_1.size();
+                            while(
+                                L_1.size() > 2 
+                                && isInterior(LPVS[0], L_1[0], L_1[sz-1], L_1[sz-2])
+                            ){
                                 L_1.pop_back();
-                            }else {
-                                L_1.pop_back();
-                                L[m] = L_1;
-                                break;
                             }
+                            // cout << "sz: " << L_1.size() << endl; 
+                            L[m] = L_1;
                         }
                         Backward=true;
-                        LPVS.erase(LPVS.begin());
-                        
+                        LPVS.erase(LPVS.begin());                        
                     }
                 }
             }
@@ -206,7 +233,7 @@ int main() {
             // for(auto l : finals){
             //     printVlist(l);
             // }
-            // cout << endl << endl;
+            // cout << endl;
             vector<Vertex*> vlist_;
             for(auto v : vlist){
                 bool ok = true;
@@ -217,18 +244,17 @@ int main() {
             }
             vlist.clear();
             vlist = vlist_;
-            Vertex* tmp = vlist.front();
-            vlist.erase(vlist.begin());
-            vlist.push_back(tmp);
-            // cout << vlist.size() << endl;
         }        
+        Vertex* tmp = vlist.front();
+        vlist.erase(vlist.begin());
+        vlist.push_back(tmp);
+        // cout << vlist.size() << endl;
     }
 
     
     for(auto l : finals){
         printVlist(l);
     }
-    cout << endl << endl;
     printVlist(vlist);
 
     return 0;
