@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
 #include "dcel.hpp"
 #include "physvector.hpp"
 
@@ -112,8 +113,7 @@ void printVlist(vector<Vertex*> &vlist, bool centAng = true){
 
 void printDCEL(DCEL dcel){
     dcel.foreachVert([](Vertex* v){
-        cout << PhysicalVector::toDegree(PhysicalVector(toCoord(v)).getAngle()) << " : ";
-        cout << v->x << " " << v->y << endl;
+        cout << "(" << v->x << "," << v->y << ") ";
     });
     cout << endl;
 }
@@ -128,7 +128,8 @@ int main() {
         cin >> x >> y;
         vlist.push_back(new Vertex(x, y));
     }
-    sortCW1(vlist);
+    const vector<Vertex*> constlist(vlist);
+    // sortCW1(vlist);
     
     vector<vector<Vertex*>> L(1,vector<Vertex*>(1,vlist[0]));
     vector<vector<Vertex*>> finalists(0);
@@ -162,7 +163,7 @@ int main() {
             }
         }
         // printVlist(notchlist);
-        if(L.size() != vlist.size()) {
+        if(L[m].size() != vlist.size()) {
             vector<Vertex*> LPVS;
             for (int j = 0; j < notchlist.size(); j++) {
                 int chk = 0;
@@ -226,6 +227,7 @@ int main() {
             }
         }
         if (L[m].back() != vlist[1]) {
+            // cout << "FIN Lm: "; printVlist(L[m]);
             finalists.push_back(L[m]);
             // cout << "FIN: ";
             // for(auto l : finalists){
@@ -248,12 +250,16 @@ int main() {
         vlist.push_back(tmp);
         // cout << vlist.size() << endl;
     }
-
-    
-    for(auto l : finalists){
-        printVlist(l);
+    if(vlist.size()>2){
+        finalists.push_back(vlist);
     }
-    printVlist(vlist);
+
+    vector<DCEL> dcels(0);
+    for(auto l : finalists){
+        // printVlist(l);
+        dcels.push_back(DCEL(l));
+        printDCEL(dcels.back());
+    }
 
     return 0;
 }

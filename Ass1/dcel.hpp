@@ -1,7 +1,7 @@
 #ifndef DCEL_HPP
 #define DCEL_HPP
 
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
@@ -104,6 +104,15 @@ class Edge{
             Edge* b2 = b1->split();
             splice(a1,a2,b1,b2);
         }
+        static int coincides(Edge* a, Edge* b){
+            if(Vertex::coincides(a->org,b->org) && Vertex::coincides(a->dest(),b->dest())){
+                return 1;
+            }
+            if(Vertex::coincides(a->org,b->dest()) && Vertex::coincides(a->dest(),b->org)){
+                return -1;
+            }
+            return 0;
+        }
 };
 
 Edge* Vertex::edgeTo(Vertex* v){
@@ -130,6 +139,7 @@ class DCEL{
         Vertex* start = nullptr;
         Vertex* last = nullptr;
         int n = 0;
+        DCEL(){}
         DCEL(Vertex* _start){
             start = _start;
             last = start;
