@@ -2,6 +2,7 @@
 #define DCEL_HPP
 
 #include <vector>
+// #include <iostream>
 
 using namespace std;
 
@@ -28,6 +29,9 @@ class Vertex{
             return e==inc_edge;
         }
         void clearEdge();
+        void foreachIncEdge(void func(Edge*, void* param), void* param);
+        Vertex* nextV();
+        Vertex* prevV();
         static Vertex* midpoint(Vertex* a, Vertex* b){
             vector<Vertex*> vlist = {a,b};
             return centroid(vlist);
@@ -71,7 +75,7 @@ class Edge{
         }
         void setNext(Edge* e, bool setTwins = true){
             next = e;
-            e->prev = next;
+            e->prev = this;
             if(setTwins){
                 e->twin->next = twin;
                 twin->prev = e->twin;
@@ -121,6 +125,32 @@ Edge* Vertex::edgeTo(Vertex* v){
 void Vertex::clearEdge(){
     delete inc_edge;
     inc_edge = nullptr;
+}
+void Vertex::foreachIncEdge(void func(Edge*,void* param), void* param){
+    if(!this->inc_edge) return;
+    Edge* start = this->inc_edge;
+    do{
+        func(start,param);
+        if(start->twin && start->twin->next){
+            start = start->twin->next;
+        }else{
+            return;
+        }
+    }while(start!=this->inc_edge);
+}
+Vertex* Vertex::nextV(){
+    if(inc_edge){
+        return inc_edge->dest();
+    }else{
+        return nullptr;
+    }
+}
+Vertex* Vertex::prevV(){
+    if(inc_edge && inc_edge->prev){
+        return inc_edge->prev->org;
+    }else{
+        return nullptr;
+    }
 }
 
 class DCEL{
