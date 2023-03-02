@@ -134,12 +134,12 @@ int main() {
     }
     const vector<Vertex*> constlist(vlist);
     DCEL dcel(vlist);
-    dcel.foreachVert([](Vertex* v){
-        cout << "(" << v->prevV()->x << "," << v->prevV()->y << ")";
-        cout << "(" << v->x << "," << v->y << ")";
-        cout << "(" << v->nextV()->x << "," << v->nextV()->y << ") ";
-    });
-    cout << endl;
+    // dcel.foreachVert([](Vertex* v){
+    //     cout << "(" << v->prevV()->x << "," << v->prevV()->y << ")";
+    //     cout << "(" << v->x << "," << v->y << ")";
+    //     cout << "(" << v->nextV()->x << "," << v->nextV()->y << ") ";
+    // });
+    // cout << endl;
     // sortCW1(vlist);
     
     vector<vector<Vertex*>> L(1,vector<Vertex*>(1,vlist[0]));
@@ -246,7 +246,7 @@ int main() {
             L[m].back()->inc_edge->prev->setNext(e->twin,false);
             diagonals.push_back(e);
 
-            // finalists.push_back(L[m]);
+            finalists.push_back(L[m]);
             // cout << "FIN: ";
             // for(auto l : finalists){
             //     printVlist(l);
@@ -275,37 +275,37 @@ int main() {
         e->setNext(vlist.back()->inc_edge,false);
         vlist.back()->inc_edge->prev->setNext(e->twin,false);
         diagonals.push_back(e);
-        // finalists.push_back(vlist);
+        finalists.push_back(vlist);
     }
     // cout << "AAAA";
-    printDCEL(dcel);
+    // printDCEL(dcel);
     
-    vector<Edge*> edgelist(1,dcel.start->inc_edge);
-    int i = 0;
-    while(i < edgelist.size()){
-        Edge* e = edgelist[i];
-        do{
-            // cout << e << "e " << fflush;
-            // cout << e->org << "o " << fflush;
-            // cout << e->next << "n " << fflush;
-            cout << "(" << e->org->x << "," << e->org->y << ") " << fflush;
-            // cout << "(" << e->next->org->x << "," << e->next->org->y << ") " << fflush;
-            // if(!Vertex::coincides(e->prev->org,e->twin->next->dest())){
-            //     edgelist.push_back(e->twin);
-            // }
-            e = e->next;
-            // cout << Edge::coincides(e,edgelist[i]) << " ";
-        }while(e && Edge::coincides(e,edgelist[i])==0);
-        cout << endl;
-        i++;
-    }
-
-    // vector<DCEL> dcels(0);
-    // for(auto l : finalists){
-    //     // printVlist(l);
-    //     dcels.push_back(DCEL(l));
-    //     printDCEL(dcels.back());
+    // vector<Edge*> edgelist(1,dcel.start->inc_edge);
+    // int i = 0;
+    // while(i < edgelist.size()){
+    //     Edge* e = edgelist[i];
+    //     do{
+    //         // cout << e << "e " << fflush;
+    //         // cout << e->org << "o " << fflush;
+    //         // cout << e->next << "n " << fflush;
+    //         cout << "(" << e->org->x << "," << e->org->y << ") " << fflush;
+    //         // cout << "(" << e->next->org->x << "," << e->next->org->y << ") " << fflush;
+    //         // if(!Vertex::coincides(e->prev->org,e->twin->next->dest())){
+    //         //     edgelist.push_back(e->twin);
+    //         // }
+    //         e = e->next;
+    //         // cout << Edge::coincides(e,edgelist[i]) << " ";
+    //     }while(e && Edge::coincides(e,edgelist[i])==0);
+    //     cout << endl;
+    //     i++;
     // }
+
+    vector<DCEL> dcels(0);
+    for(auto l : finalists){
+        // printVlist(l);
+        dcels.push_back(DCEL(l));
+        printDCEL(dcels.back());
+    }
 
     return 0;
 }
