@@ -99,7 +99,6 @@ bool isReflex(Vertex* a, Vertex* b, Vertex* c){
     return PhysicalVector::angleBetween(toCoord(a), toCoord(b), toCoord(c)) > PI;
 }
 
-
 void printVlist(vector<Vertex*> &vlist, bool centAng = true){
     Vertex* cent = Vertex::centroid(vlist);
     cout << "{ ";
@@ -388,7 +387,34 @@ int main() {
     cout << "After decomposition: " << endl;
     printDCEL2(dcel);
     
+    for(auto it = diagonals.rbegin(); it != diagonals.rend(); it++){
+        auto d = *it;
+        // printEdge(d);
+        bool flag1 = isReflex(d->twin->next->dest(),d->org,d->prev->org);
+        bool flag2 = isReflex(d->next->dest(),d->dest(),d->twin->prev->org);
+        if(flag1 || flag2) continue;
+        // cout << "!" << endl;
+        if(d->org->inc_edge==d){
+            d->org->inc_edge = d->twin->next;
+        }
+        if(d->dest()->inc_edge==d->twin){
+            d->dest()->inc_edge = d->next;
+        }
+        // cout << d->twin->prev->next << d->twin;
+        d->prev->setNext(d->twin->next,false);
+        d->twin->prev->setNext(d->next,false);
+        for(auto jt = dcel.edges.rbegin(); jt != dcel.edges.rend(); jt++){
+            Edge* e = *jt;
+            if(Edge::coincides(e,d)!=0){
+                dcel.edges.erase(next(jt).base());
+            }
+        }
+        delete d;
+        diagonals.erase(next(it).base());
+    }
     
+    cout << "After merging: " << endl;
+    printDCEL2(dcel);
 
     // vector<DCEL> dcels(0);
     // for(auto l : finalists){
