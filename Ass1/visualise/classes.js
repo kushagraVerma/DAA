@@ -32,11 +32,11 @@ class Poly{
         for(let pt of this.pts){
             ellipse(pt.x,pt.y,4,4);
         }
-        textSize(10);
-        fill(255,255,0);
-        for(let pt of this.pts){
-            text(`${trunc(pt.x)},${-trunc(pt.y)}`,pt.x,pt.y);
-        }
+        // textSize(10);
+        // fill(255,255,0);
+        // for(let pt of this.pts){
+        //     text(`${trunc(pt.x)},${-trunc(pt.y)}`,pt.x,pt.y);
+        // }
         pop();
     }
     logPoly(){

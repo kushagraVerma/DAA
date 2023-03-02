@@ -15,34 +15,34 @@ function addPolys(s){
     }
 }
 
-let bodyElt, canvElt, printButt, printP, addButt, addAr;
+let bodyElt, canvElt, resetButt, copyButt, addButt, addAr;
 function setupButtons(){
     bodyElt = document.body;
     canvElt = document.getElementsByTagName("canvas");
     bodyElt.appendChild(document.createElement("br"));
-    div1 = document.createElement("div");
-    div2 = document.createElement("div");
-    bodyElt.appendChild(div1);
-    bodyElt.appendChild(div2);
-    printButt = document.createElement("button");
+    resetButt = document.createElement("button");
+    copyButt = document.createElement("button");
     addButt = document.createElement("button");
-    printP = document.createElement("p");
     addAr = document.createElement("textarea");
     addAr.cols = "20";
-    printButt.innerText = "PRINT";
+    resetButt.innerText = "RESET";
+    copyButt.innerText = "COPY POLY DATA";
     addButt.innerText = "ADD POLY";
-    printButt.onclick = ()=>{
+    resetButt.onclick = ()=>{
+        polys=[];
+        addAr.value="";
+    }
+    copyButt.onclick = ()=>{
         let polyStr = polys[0].printPoly();
-        printP.innerText = "Copied to clipboard:\n"+polyStr;
         navigator.clipboard.writeText(polyStr);
     };
     addButt.onclick = ()=>addPolys(addAr.value);
-    div1.appendChild(printButt);
-    div1.appendChild(document.createElement("br"));
-    div1.appendChild(printP);
-    div2.appendChild(addButt);
-    div2.appendChild(document.createElement("br"));
-    div2.appendChild(addAr);
+    bodyElt.appendChild(resetButt);
+    bodyElt.appendChild(copyButt);
+    bodyElt.appendChild(document.createElement("br"));
+    bodyElt.appendChild(addButt);
+    bodyElt.appendChild(document.createElement("br"));
+    bodyElt.appendChild(addAr);
 }
 
 function setup() {
