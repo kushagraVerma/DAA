@@ -2,6 +2,7 @@
 #define DCEL_HPP
 
 #include <vector>
+#include <functional>
 // #include <iostream>
 
 using namespace std;
@@ -29,9 +30,10 @@ class Vertex{
             return e==inc_edge;
         }
         void clearEdge();
-        void foreachIncEdge(void func(Edge*, void* param), void* param);
+        void foreachIncEdge(function<void(Edge*)> func);
         Vertex* nextV();
         Vertex* prevV();
+        static Edge* getEdge(Vertex* a, Vertex* b);
         static Vertex* midpoint(Vertex* a, Vertex* b){
             vector<Vertex*> vlist = {a,b};
             return centroid(vlist);
@@ -46,6 +48,12 @@ class Vertex{
         }
         static bool coincides(Vertex* a, Vertex* b){
             return (a->x == b->x && a->y == b->y);
+        }
+        bool operator<(Vertex* other){
+            return (x==other->x?y<other->y:x<other->x);
+        }
+        bool operator==(Vertex* other){
+            return (x==other->x && y==other->y);
         }
 };
 class Edge{
@@ -119,18 +127,28 @@ class Edge{
         }
 };
 
+Edge* Vertex::getEdge(Vertex* a, Vertex* b){
+    Edge* E = nullptr;
+    a->foreachIncEdge([&b,&E](Edge* e){
+        if(Vertex::coincides(b,e->dest())){
+            E = e;
+        }
+    });
+    return E;
+}
 Edge* Vertex::edgeTo(Vertex* v){
-    return (inc_edge = new Edge(this,v));
+    Edge* existing = Vertex::getEdge(this,v);
+    return (inc_edge = (existing? existing : new Edge(this,v)));
 }
 void Vertex::clearEdge(){
     delete inc_edge;
     inc_edge = nullptr;
 }
-void Vertex::foreachIncEdge(void func(Edge*,void* param), void* param){
+void Vertex::foreachIncEdge(function<void(Edge*)> func){
     if(!this->inc_edge) return;
     Edge* start = this->inc_edge;
     do{
-        func(start,param);
+        func(start);
         if(start->twin && start->twin->next){
             start = start->twin->next;
         }else{
@@ -168,6 +186,7 @@ class DCEL{
     public:
         Vertex* start = nullptr;
         Vertex* last = nullptr;
+        vector<Edge*> edges;
         int n = 0;
         DCEL(){}
         DCEL(Vertex* _start){
@@ -185,9 +204,17 @@ class DCEL{
                 last->edgeTo(start);//...<-e-last--->start
                 e->twin->setNext(last->inc_edge);
                 last->inc_edge->setNext(start->inc_edge);
+                Edge* curr = e;
+                do{
+                    edges.push_back(curr);
+                    curr->org->inc_edge = curr;
+                    // curr->twin->next = nullptr;
+                    // curr->twin->prev = nullptr;
+                    curr = curr->next;
+                }while(curr!=e);
             }
         }
-        void foreachVert(void func(Vertex*)){
+        void foreachVert(function<void(Vertex*)> func){
             Vertex* curr = start;
             do{
                 func(curr);
