@@ -14,6 +14,9 @@ class Edge;
 class Face{
     public:
         Edge* inc_edge = nullptr;
+        Face(Edge* e_){
+            inc_edge = e_;
+        }
         bool isInc(Edge* e){
             return e==inc_edge;
         }
@@ -80,6 +83,9 @@ class Edge{
         }
         Vertex* dest(){
             return twin->org;
+        }
+        Face* right(){
+            return twin->left;
         }
         void setNext(Edge* e, bool setTwins = true){
             next = e;
@@ -204,14 +210,19 @@ class DCEL{
                 last->edgeTo(start);//...<-e-last--->start
                 e->twin->setNext(last->inc_edge);
                 last->inc_edge->setNext(start->inc_edge);
-                Edge* curr = e;
-                do{
-                    edges.push_back(curr);
+                // Edge* curr = e;
+                // do{
+                //     edges.push_back(curr);
+                //     curr->org->inc_edge = curr;
+                //     // curr->twin->next = nullptr;
+                //     // curr->twin->prev = nullptr;
+                //     curr = curr->next;
+                // }while(curr!=e);
+                Face* f0 = new Face(e);
+                forEdgesAlong(e,[&f0](Edge* curr){
+                    curr->left = f0;
                     curr->org->inc_edge = curr;
-                    // curr->twin->next = nullptr;
-                    // curr->twin->prev = nullptr;
-                    curr = curr->next;
-                }while(curr!=e);
+                });
             }
         }
         void foreachVert(function<void(Vertex*)> func){
@@ -221,6 +232,60 @@ class DCEL{
                 if(curr->inc_edge && curr->inc_edge->next) 
                     curr = curr->inc_edge->next->org;
             }while(curr!=start);
+        }
+        Edge* forEdgesAlong(Edge* e, function<void(Edge*)> func){
+            if(!e) return nullptr;
+            Edge* curr = e;
+            do{
+                func(curr);
+                curr = curr->next;
+            }while(curr && curr!=e);
+            return curr;
+        }
+        Face* addFaceAlong(Edge* e, Face* f = nullptr){
+            if(!e || !e->next) return nullptr;
+            if(!f) f = new Face(e);
+            if(!forEdgesAlong(e,[&f](Edge* e_){
+                e_->left = f;
+            })) return nullptr;
+            return f;
+        }
+        Edge* splitFace(Vertex* v1, Vertex* v2, bool &status){
+            status = false;
+            Edge* e = Vertex::getEdge(v1,v2);
+            if(!e){
+                status = true;
+                e = new Edge(v1,v2);
+                v1->inc_edge->prev->setNext(e,false);
+                e->twin->setNext(v1->inc_edge,false);
+                v2->inc_edge->prev->setNext(e->twin,false);
+                e->setNext(v2->inc_edge,false);
+                v2->inc_edge = e->twin;
+                Face* f1 = e->next->left;
+                e->left = f1;
+                f1->inc_edge = e;
+                Face* f2 = addFaceAlong(e->twin);
+            }
+            return e;
+        }
+        Face* mergeFace(Edge* d){
+            if(!d) return nullptr;
+            Face* f1 = d->left; Face* f2 = d->right();
+            if(!f1 || !f2) return nullptr;
+            if(d->org->inc_edge==d){
+                d->org->inc_edge = d->twin->next;
+            }
+            if(d->dest()->inc_edge==d->twin){
+                d->dest()->inc_edge = d->next;
+            }
+            if(f1->inc_edge==d){
+                f1->inc_edge = d->next;
+            }
+            addFaceAlong(d->twin,f1);
+            d->prev->setNext(d->twin->next,false);
+            d->twin->prev->setNext(d->next,false);
+            delete f2;
+            return f1;
         }
 };
 

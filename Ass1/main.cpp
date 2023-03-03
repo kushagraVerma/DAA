@@ -291,32 +291,11 @@ int main() {
             }
         }
         if (L[m].back() != vlist[1]) {
-            Edge* e = Vertex::getEdge(L[m].front(),L[m].back());
-            if(!e){
-                // cout << "NEW!" << endl;
-                e = new Edge(L[m].front(),L[m].back());
-                dcel.edges.push_back(e);
-                // printEdge(L[m].front()->inc_edge->prev);
-                // printEdge(L[m].front()->inc_edge);
-                // cout << endl;
-                // printEdge(L[m].back()->inc_edge->prev);
-                // printEdge(L[m].back()->inc_edge);
-                // cout << endl;
-                L[m].front()->inc_edge->prev->setNext(e,false);
-                e->twin->setNext(L[m].front()->inc_edge,false);
-                L[m].back()->inc_edge->prev->setNext(e->twin,false);
-                e->setNext(L[m].back()->inc_edge,false);
-                diagonals.push_back(e);
-                L[m].back()->inc_edge = e->twin;
-                // cout << "Edge: "; printEdge(e); cout << endl;
-                // cout << "+next: "; printEdge(e->next); cout << endl;
-                // cout << "+prev: "; printEdge(e->prev); cout << endl;
-                // cout << "Twin: "; printEdge(e->twin); cout << endl;
-                // cout << "-next: "; printEdge(e->twin->next); cout << endl;
-                // cout << "-prev: "; printEdge(e->twin->prev); cout << endl;
-                // cout << endl;
-                // printDCEL2(dcel); cout << endl;
-            }else{
+            
+            bool status;
+            Edge* e = dcel.splitFace(L[m].front(),L[m].back(),status);
+            if(e){
+                if(status) diagonals.push_back(e);
                 dcel.edges.push_back(e);
             }
 
@@ -344,32 +323,10 @@ int main() {
     }
     // exit(-1);
     if(vlist.size()>2){
-        Edge* e = Vertex::getEdge(vlist.front(),vlist.back());
-        if(!e){
-            // cout << "NEW!" << endl;
-            e = new Edge(vlist.front(),vlist.back());
-            dcel.edges.push_back(e);
-            // printEdge(vlist.front()->inc_edge->prev);
-            // printEdge(vlist.front()->inc_edge);
-            // cout << endl;
-            // printEdge(vlist.back()->inc_edge->prev);
-            // printEdge(vlist.back()->inc_edge);
-            // cout << endl;
-            vlist.front()->inc_edge->prev->setNext(e,false);
-            e->twin->setNext(vlist.front()->inc_edge,false);
-            vlist.back()->inc_edge->prev->setNext(e->twin,false);
-            e->setNext(vlist.back()->inc_edge,false);
-            diagonals.push_back(e);
-            vlist.back()->inc_edge = e->twin;
-            // cout << "Edge: "; printEdge(e); cout << endl;
-            // cout << "+next: "; printEdge(e->next); cout << endl;
-            // cout << "+prev: "; printEdge(e->prev); cout << endl;
-            // cout << "Twin: "; printEdge(e->twin); cout << endl;
-            // cout << "-next: "; printEdge(e->twin->next); cout << endl;
-            // cout << "-prev: "; printEdge(e->twin->prev); cout << endl;
-            // cout << endl;
-            // printDCEL2(dcel); cout << endl;
-        }else{
+        bool status;
+        Edge* e = dcel.splitFace(vlist.front(),vlist.back(),status);
+        if(e){
+            if(status) diagonals.push_back(e);
             dcel.edges.push_back(e);
         }
     }
@@ -393,24 +350,16 @@ int main() {
         bool flag1 = isReflex(d->twin->next->dest(),d->org,d->prev->org);
         bool flag2 = isReflex(d->next->dest(),d->dest(),d->twin->prev->org);
         if(flag1 || flag2) continue;
-        // cout << "!" << endl;
-        if(d->org->inc_edge==d){
-            d->org->inc_edge = d->twin->next;
-        }
-        if(d->dest()->inc_edge==d->twin){
-            d->dest()->inc_edge = d->next;
-        }
-        // cout << d->twin->prev->next << d->twin;
-        d->prev->setNext(d->twin->next,false);
-        d->twin->prev->setNext(d->next,false);
-        for(auto jt = dcel.edges.rbegin(); jt != dcel.edges.rend(); jt++){
-            Edge* e = *jt;
-            if(Edge::coincides(e,d)!=0){
-                dcel.edges.erase(next(jt).base());
+        if(dcel.mergeFace(d)){
+            for(auto jt = dcel.edges.rbegin(); jt != dcel.edges.rend(); jt++){
+                Edge* e = *jt;
+                if(Edge::coincides(e,d)!=0){
+                    dcel.edges.erase(next(jt).base());
+                }
             }
+            delete d;
+            diagonals.erase(next(it).base());
         }
-        delete d;
-        diagonals.erase(next(it).base());
     }
     
     cout << "After merging: " << endl;

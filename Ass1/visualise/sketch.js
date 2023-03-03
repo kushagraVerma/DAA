@@ -15,19 +15,24 @@ function addPolys(s){
     }
 }
 
-let bodyElt, canvElt, resetButt, copyButt, addButt, addAr;
+let bodyElt, canvElt, undoButt, resetButt, copyButt, addButt, addAr;
 function setupButtons(){
     bodyElt = document.body;
     canvElt = document.getElementsByTagName("canvas");
     bodyElt.appendChild(document.createElement("br"));
+    undoButt = document.createElement("button");
     resetButt = document.createElement("button");
     copyButt = document.createElement("button");
     addButt = document.createElement("button");
     addAr = document.createElement("textarea");
     addAr.cols = "20";
+    undoButt.innerText = "UNDO";
     resetButt.innerText = "RESET";
     copyButt.innerText = "COPY POLY DATA";
     addButt.innerText = "ADD POLY";
+    undoButt.onclick = ()=>{
+        polys[polys.length-1]?.pts?.pop();
+    };
     resetButt.onclick = ()=>{
         polys=[];
         addAr.value="";
@@ -37,6 +42,7 @@ function setupButtons(){
         navigator.clipboard.writeText(polyStr);
     };
     addButt.onclick = ()=>addPolys(addAr.value);
+    bodyElt.appendChild(undoButt);
     bodyElt.appendChild(resetButt);
     bodyElt.appendChild(copyButt);
     bodyElt.appendChild(document.createElement("br"));
