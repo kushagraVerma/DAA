@@ -110,14 +110,6 @@ void printVlist(vector<Vertex*> &vlist, bool centAng = true){
     delete cent;
     cout << "}" << endl;
 }
-
-void printDCEL(DCEL dcel){
-    dcel.foreachVert([](Vertex* v){
-        cout << "(" << v->x << "," << v->y << ") ";
-    });
-    cout << endl;
-}
-
 void printVert(Vertex* v){
     cout << "(" << v->x << "," << v->y << ")";
 }
@@ -126,48 +118,11 @@ void printEdge(Edge* e){
     cout << "<=>";
     printVert(e->dest());
 }
-void printDCEL2(DCEL &dcel){
-    char c;
-    vector<vector<Vertex*>> uniques;
-    for(auto e : dcel.edges){
-        Edge* curr = e;
-        vector<Vertex*> vvect;
-        Vertex* v = e->org;
-        int i = 0, idx = 0;
-        do{
-            // printVert(curr->org); cout << " ";
-            // cout << "(" << curr->org->x << "," << curr->org->y << ")<=>";
-            // cout << "(" << curr->dest()->x << "," << curr->dest()->y << ") " << endl;
-            vvect.push_back(curr->org);
-            if(curr->org<v){
-                v = curr->org;
-                idx = i;
-            }
-            curr = curr->next;
-            i++;
-            // cin >> c;
-        }while(curr && curr!=e);
-        idx = (idx+vvect.size()-1)%vvect.size();
-        // printVlist(vvect); cout << idx;
-        vector<Vertex*> vvect_(vvect.begin()+idx,vvect.end());
-        copy(vvect.begin(),vvect.begin()+idx,back_inserter(vvect_));
-        // printVlist(vvect_);
-        // cout << endl;
-        bool ok = true;
-        for(auto &unique : uniques){
-            if(vvect_==unique){
-                ok = false;
-                break;
-            }
-        }
-        if(ok){
-            uniques.push_back(vvect_);
-        }
-    }
-    for(auto &unique : uniques){
-        for(auto &vert : unique){
-            printVert(vert); cout << " ";
-        }
+void printDCEL(DCEL &dcel){
+    for(auto f : dcel.faces){
+        dcel.forEdgesAlong(f->inc_edge,[](Edge* e){
+            printVert(e->org); cout << " ";
+        });
         cout << endl;
     }
 }
@@ -183,13 +138,6 @@ int main() {
     }
     const vector<Vertex*> constlist(vlist);
     DCEL dcel(vlist);
-    // dcel.foreachVert([](Vertex* v){
-    //     printVert(v->prevV());
-    //     printVert(v);
-    //     printVert(v->nextV());
-    //     cout << " ";
-    // });
-    // cout << endl;
     cout << "Original DCEL: " << endl;
     printDCEL(dcel);
     // sortCW1(vlist);
@@ -294,10 +242,7 @@ int main() {
             
             bool status;
             Edge* e = dcel.splitFace(L[m].front(),L[m].back(),status);
-            if(e){
-                if(status) diagonals.push_back(e);
-                dcel.edges.push_back(e);
-            }
+            if(status) diagonals.push_back(e);
 
             finalists.push_back(L[m]);
             // cout << "FIN: ";
@@ -325,10 +270,7 @@ int main() {
     if(vlist.size()>2){
         bool status;
         Edge* e = dcel.splitFace(vlist.front(),vlist.back(),status);
-        if(e){
-            if(status) diagonals.push_back(e);
-            dcel.edges.push_back(e);
-        }
+        if(status) diagonals.push_back(e);
     }
     // exit(-1);
     // cout << "AAAA";
@@ -341,8 +283,8 @@ int main() {
     //     cout << endl;
     // }
     // cout << endl;
-    cout << "After decomposition: " << endl;
-    printDCEL2(dcel);
+    cout << "\nAfter decomposition: " << dcel.faces.size() << " polygons" << endl;
+    printDCEL(dcel);
     
     for(auto it = diagonals.rbegin(); it != diagonals.rend(); it++){
         auto d = *it;
@@ -351,19 +293,13 @@ int main() {
         bool flag2 = isReflex(d->next->dest(),d->dest(),d->twin->prev->org);
         if(flag1 || flag2) continue;
         if(dcel.mergeFace(d)){
-            for(auto jt = dcel.edges.rbegin(); jt != dcel.edges.rend(); jt++){
-                Edge* e = *jt;
-                if(Edge::coincides(e,d)!=0){
-                    dcel.edges.erase(next(jt).base());
-                }
-            }
             delete d;
             diagonals.erase(next(it).base());
         }
     }
     
-    cout << "After merging: " << endl;
-    printDCEL2(dcel);
+    cout << "\nAfter merging: " << dcel.faces.size() << " polygons" << endl;
+    printDCEL(dcel);
 
     // vector<DCEL> dcels(0);
     // for(auto l : finalists){

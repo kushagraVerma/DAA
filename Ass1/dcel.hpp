@@ -192,7 +192,8 @@ class DCEL{
     public:
         Vertex* start = nullptr;
         Vertex* last = nullptr;
-        vector<Edge*> edges;
+        // vector<Edge*> edges;
+        vector<Face*> faces;
         int n = 0;
         DCEL(){}
         DCEL(Vertex* _start){
@@ -223,15 +224,8 @@ class DCEL{
                     curr->left = f0;
                     curr->org->inc_edge = curr;
                 });
+                faces.push_back(f0);
             }
-        }
-        void foreachVert(function<void(Vertex*)> func){
-            Vertex* curr = start;
-            do{
-                func(curr);
-                if(curr->inc_edge && curr->inc_edge->next) 
-                    curr = curr->inc_edge->next->org;
-            }while(curr!=start);
         }
         Edge* forEdgesAlong(Edge* e, function<void(Edge*)> func){
             if(!e) return nullptr;
@@ -265,6 +259,7 @@ class DCEL{
                 e->left = f1;
                 f1->inc_edge = e;
                 Face* f2 = addFaceAlong(e->twin);
+                faces.push_back(f2);
             }
             return e;
         }
@@ -284,6 +279,12 @@ class DCEL{
             addFaceAlong(d->twin,f1);
             d->prev->setNext(d->twin->next,false);
             d->twin->prev->setNext(d->next,false);
+            for(auto it = faces.begin(); it != faces.end(); it++){
+                if(*it==f2){
+                    faces.erase(it);
+                    break;
+                }
+            }
             delete f2;
             return f1;
         }

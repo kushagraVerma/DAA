@@ -15,7 +15,8 @@ function addPolys(s){
     }
 }
 
-let bodyElt, canvElt, undoButt, resetButt, copyButt, addButt, addAr;
+let drawgrid = true;
+let bodyElt, canvElt, undoButt, resetButt, copyButt, gridButt, addButt, addAr;
 function setupButtons(){
     bodyElt = document.body;
     canvElt = document.getElementsByTagName("canvas");
@@ -23,17 +24,29 @@ function setupButtons(){
     undoButt = document.createElement("button");
     resetButt = document.createElement("button");
     copyButt = document.createElement("button");
+    gridButt = document.createElement("button");
     addButt = document.createElement("button");
     addAr = document.createElement("textarea");
     addAr.cols = "20";
     undoButt.innerText = "UNDO";
     resetButt.innerText = "RESET";
     copyButt.innerText = "COPY POLY DATA";
-    addButt.innerText = "ADD POLY";
+    gridButt.innerText = "GRID TOGGLE";
+    addButt.innerText = "ADD POLYS";
     undoButt.onclick = ()=>{
-        polys[polys.length-1]?.pts?.pop();
+        if(polys[polys.length-1]?.pts.length==1){
+            polys.pop();
+            if(!polys.length){
+                undoButt.disabled = true;
+                copyButt.disabled = true;
+            }
+        }else{
+            polys[polys.length-1]?.pts.pop();
+        }
     };
     resetButt.onclick = ()=>{
+        undoButt.disabled = true;
+        copyButt.disabled = true;
         polys=[];
         addAr.value="";
     }
@@ -41,10 +54,20 @@ function setupButtons(){
         let polyStr = polys[0].printPoly();
         navigator.clipboard.writeText(polyStr);
     };
-    addButt.onclick = ()=>addPolys(addAr.value);
+    gridButt.onclick = ()=>{
+        drawgrid = !drawgrid;
+    };
+    addButt.onclick = ()=>{
+        undoButt.disabled = false;
+        copyButt.disabled = false;
+        addPolys(addAr.value);
+    };
+    undoButt.disabled = true;
+    copyButt.disabled = true;
     bodyElt.appendChild(undoButt);
     bodyElt.appendChild(resetButt);
     bodyElt.appendChild(copyButt);
+    bodyElt.appendChild(gridButt);
     bodyElt.appendChild(document.createElement("br"));
     bodyElt.appendChild(addButt);
     bodyElt.appendChild(document.createElement("br"));
@@ -58,16 +81,29 @@ function setup() {
     setupButtons();
 }
 
-function draw() {
-    background(0);
+function grid(){
     push();
-    stroke(255);
-    strokeWeight(2);
+    stroke(0,0,255);
+    strokeWeight(3);
     line(width/2,0,width/2,height);
     line(0,height/2,width,height/2);
+    strokeWeight(1);
+    for (let x = 50; x < width; x+=50) {
+        line(x,0,x,height);
+    }
+    for (let y = 50; y < height; y+=50) {
+        line(0,y,width,y);
+    }
     pop();
+}
+
+function draw() {
+    background(0);
+    if(drawgrid){
+        grid();
+    }
     for(let poly of polys){
-        poly.drawPoly();
+        poly.drawPoly(drawgrid);
     }
 }
 
@@ -79,8 +115,13 @@ function mouseClicked(){
         polys.push(new Poly());
     }
     if(polys.length==1){
+        undoButt.disabled = false;
+        copyButt.disabled = false;
         let x = mouseX-width/2;
         let y = -(mouseY-height/2);
         polys[polys.length-1].addPt(x,y);
+    }else{
+        undoButt.disabled = true;
+        copyButt.disabled = true;
     }
 }

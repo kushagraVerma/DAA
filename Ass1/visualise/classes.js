@@ -5,7 +5,7 @@ function trunc(val,to=10){
 class Poly{
     constructor(pts=[]){
         this.pts = pts;
-        this.color = color(random(100,255),random(100,255),random(100,255),100);
+        this.color = color(random(100,255),random(100,255),random(100,255),200);
     }
     addPt(x,y){
         // setFac(x,y);
@@ -16,7 +16,7 @@ class Poly{
             addPt(pt.x,pt.y);
         }
     }    
-    drawPoly(){
+    drawPoly(txt){
         push();
         translate(width/2,height/2);
         strokeWeight(2);
@@ -32,11 +32,13 @@ class Poly{
         for(let pt of this.pts){
             ellipse(pt.x,pt.y,4,4);
         }
-        // textSize(10);
-        // fill(255,255,0);
-        // for(let pt of this.pts){
-        //     text(`${trunc(pt.x)},${-trunc(pt.y)}`,pt.x,pt.y);
-        // }
+        if(txt){
+            textSize(10);
+            fill(255,255,0);
+            for(let pt of this.pts){
+                text(`${trunc(pt.x)},${-trunc(pt.y)}`,pt.x,pt.y);
+            }
+        }
         pop();
     }
     logPoly(){
