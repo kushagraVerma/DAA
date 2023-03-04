@@ -122,7 +122,7 @@ void printDCEL(DCEL &dcel){
     for(auto f : dcel.faces){
         dcel.forEdgesAlong(f->inc_edge,[](Edge* e){
             printVert(e->org); cout << " ";
-        });
+        },true);
         cout << endl;
     }
 }

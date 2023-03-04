@@ -6,6 +6,7 @@ class Poly{
     constructor(pts=[]){
         this.pts = pts;
         this.color = color(random(100,255),random(100,255),random(100,255),200);
+        this.stroke = color(255);
     }
     addPt(x,y){
         // setFac(x,y);
@@ -20,7 +21,7 @@ class Poly{
         push();
         translate(width/2,height/2);
         strokeWeight(2);
-        stroke(255);
+        stroke(this.stroke);
         fill(this.color);
         beginShape();
         for(let pt of this.pts){

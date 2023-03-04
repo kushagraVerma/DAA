@@ -2,6 +2,9 @@ let polys = [];
 
 function addPolys(s){
     //expects "(x1,y1) (x2,y2)...
+    for(let poly of polys){
+        poly.stroke = color(0);
+    }
     let lines = s.split("\n");
     for(let line of lines){
         let pts_ = line.split(" ");

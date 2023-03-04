@@ -211,15 +211,7 @@ class DCEL{
                 last->edgeTo(start);//...<-e-last--->start
                 e->twin->setNext(last->inc_edge);
                 last->inc_edge->setNext(start->inc_edge);
-                // Edge* curr = e;
-                // do{
-                //     edges.push_back(curr);
-                //     curr->org->inc_edge = curr;
-                //     // curr->twin->next = nullptr;
-                //     // curr->twin->prev = nullptr;
-                //     curr = curr->next;
-                // }while(curr!=e);
-                Face* f0 = new Face(e);
+                Face* f0 = new Face(e->prev);
                 forEdgesAlong(e,[&f0](Edge* curr){
                     curr->left = f0;
                     curr->org->inc_edge = curr;
@@ -227,12 +219,12 @@ class DCEL{
                 faces.push_back(f0);
             }
         }
-        Edge* forEdgesAlong(Edge* e, function<void(Edge*)> func){
+        Edge* forEdgesAlong(Edge* e, function<void(Edge*)> func, bool reverse = false){
             if(!e) return nullptr;
             Edge* curr = e;
             do{
                 func(curr);
-                curr = curr->next;
+                curr = (reverse? curr->prev : curr->next);
             }while(curr && curr!=e);
             return curr;
         }
