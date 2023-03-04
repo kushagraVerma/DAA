@@ -9,6 +9,7 @@
         "span": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "type_traits": "cpp"
     }
 }
