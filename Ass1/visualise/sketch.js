@@ -171,12 +171,12 @@ function draw() {
     }
 }
 
-// function mouseOut(){
-//     return mouseX<0 || mouseX>width || mouseY<0 || mouseY<height;
-// }
+function mouseOut(){
+    return mouseX<0 || mouseX>width || mouseY<0 || mouseY>height;
+}
 
 function handleLeftClick(){
-    if(mouseX<0 || mouseX>width || mouseY<0 || mouseY>width){
+    if(mouseOut()){
         return;
     }
     if(!polys.length){
@@ -197,18 +197,18 @@ function handleLeftClick(){
 }
 
 function mouseClicked(){
-    // if(mouseOut()){
-    //     return;
-    // }
+    if(mouseOut()){
+        return;
+    }
     if(mouseButton === LEFT){
         handleLeftClick();
     }
 }
 
 function mouseDragged(){
-    // if(mouseOut()){
-    //     return false;
-    // }
+    if(mouseOut()){
+        return false;
+    }
     if(mouseButton === CENTER){
         transform.dx += (mouseX-pmouseX)*transform.ds;
         transform.dy += (mouseY-pmouseY)*transform.ds;
@@ -216,9 +216,9 @@ function mouseDragged(){
     return false;
 }
 function mouseWheel(event){
-    // if(mouseOut()){
-    //     return;
-    // }
+    if(mouseOut()){
+        return;
+    }
     let d = event.delta/1000;
     if(keyIsDown(SHIFT)){
         d/=4;
