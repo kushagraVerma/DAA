@@ -34,7 +34,7 @@ bool isInterior(Vertex* p, Vertex* a, Vertex* b, Vertex* c) {
     double a2 = area(toCoord(p), toCoord(b), toCoord(c));
     double a3 = area(toCoord(p), toCoord(a), toCoord(c));
     double total = area(toCoord(a), toCoord(b), toCoord(c));
-    return (total == (a1 + a2 + a3));
+    return abs(total - (a1 + a2 + a3))<(1e-12);
 }
 
 /**
@@ -42,7 +42,7 @@ bool isInterior(Vertex* p, Vertex* a, Vertex* b, Vertex* c) {
  * @param p vertex to be checked for interiority
  * @param rect integer array that describes the coordinates of the rectangular region
  */
-bool isInterior(Vertex* p, int rect[4]) {
+bool isInterior(Vertex* p, double rect[4]) {
     return (((p -> x) > rect[0]) && ((p -> x) < rect[1]) && ((p -> y) > rect[2]) && ((p -> y) < rect[3]));
 }
 
@@ -51,8 +51,8 @@ bool isInterior(Vertex* p, int rect[4]) {
  * @param vlist a list of vertices
  * @param _rect list describing the coordinates of the resultant rectangle
  */
-void getBoundRect(vector<Vertex*> vlist, int _rect[4]){
-    int rect[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
+void getBoundRect(vector<Vertex*> vlist, double _rect[4]){
+    double rect[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
     for(int j = 0; j < vlist.size(); j++) {
         if (rect[0] > vlist[j] -> x) {/// Lower rectangle edge parallel to x-axis
             rect[0] = vlist[j] -> x;
@@ -228,7 +228,7 @@ int main(int argc, char *argv[]) {
             is in the interior of the triangle formed by the 1st, (n - 1) th and nth vertex using the function isInterior for the vertices. If inside, we 
             reduce the size of the DCEL until the notch is thrown out. This is done for all notches in the LPVS list.*/
             while (LPVS.size() > 0) { 
-                int rect[4];
+                double rect[4];
                 getBoundRect(L[m], rect);
                 bool Backward = false;
                 while(!Backward && LPVS.size() > 0){
