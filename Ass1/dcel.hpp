@@ -340,7 +340,7 @@ class DCEL{
         /**
          * Constructor function for DCEL class
          * @param _start first vertex of the DCEL
-        */
+         */
         DCEL(Vertex* _start){
             start = _start;
             last = start;
@@ -350,7 +350,7 @@ class DCEL{
         /**
          * Overloaded constructor function for DCEL class
          * @param vlist vertices to be added to the DCEL
-        */
+         */
         DCEL(vector<Vertex*> &vlist) : DCEL(vlist[0]){
             int _n = vlist.size();
             if(_n > 1){
@@ -405,7 +405,7 @@ class DCEL{
          * @param v1 pointer to the first vertex
          * @param v2 pointer to the second vertex
          * @param status reference to a boolean; when unset, implies that such a split already existed
-        */
+         */
         Edge* splitFace(Vertex* v1, Vertex* v2, bool &status){
             status = false;
             Edge* e = Vertex::getEdge(v1, v2);
@@ -429,7 +429,7 @@ class DCEL{
         /**
          * Function to merge two faces along the given edge
          * @param d pointer to the edge (a diagonal of the face)
-        */
+         */
         Face* mergeFace(Edge* d){
             if(!d) return nullptr;
             Face* f1 = d -> left;
