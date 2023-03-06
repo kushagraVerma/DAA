@@ -1,0 +1,248 @@
+\hypertarget{classEdge}{}\doxysection{Edge Class Reference}
+\label{classEdge}\index{Edge@{Edge}}
+
+
+{\ttfamily \#include $<$dcel.\+hpp$>$}
+
+
+
+Collaboration diagram for Edge\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEdge_a999f30c5004dc2b8c7ba9b07e6b6f2df}{Edge}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+org)
+\item 
+\mbox{\hyperlink{classEdge_a48ee7cab8a01e332f65326585d5f3bb1}{Edge}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+org, \mbox{\hyperlink{classEdge}{Edge}} $\ast$\+\_\+twin)
+\item 
+\mbox{\hyperlink{classEdge_a563c0ce441769cc2875027caf78acfcc}{Edge}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+org, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+dest)
+\item 
+\mbox{\hyperlink{classEdge_a2f37b72f044427961d6730943daf10e0}{$\sim$\+Edge}} ()
+\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classEdge_a194babc54f01412d2cb083a953b2fb33}{dest}} ()
+\item 
+\mbox{\hyperlink{classFace}{Face}} $\ast$ \mbox{\hyperlink{classEdge_a081e8e91b671f853a5ffe8cb5a63f27d}{right}} ()
+\item 
+void \mbox{\hyperlink{classEdge_af3d75d26518f0cb1589ffd6fd48f0b65}{set\+Next}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$e, bool set\+Twins=true)
+\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classEdge_ab6832da3098b7f866dd0bd042c7b9f2b}{split}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
+\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classEdge_a2bec7240e46c960cce2810ff53b8e3fa}{split}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classEdge_a7a495d88961c511b8f61aa9a9899a5ee}{splice}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$a1, \mbox{\hyperlink{classEdge}{Edge}} $\ast$a2, \mbox{\hyperlink{classEdge}{Edge}} $\ast$b1, \mbox{\hyperlink{classEdge}{Edge}} $\ast$b2)
+\item 
+static void \mbox{\hyperlink{classEdge_a10b9e100d1cbfcee1259f6faeb81e1ea}{merge}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$a1, \mbox{\hyperlink{classEdge}{Edge}} $\ast$b1)
+\item 
+static int \mbox{\hyperlink{classEdge_aaf45c8bb48f4c857b167a567d2816d56}{coincides}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$a, \mbox{\hyperlink{classEdge}{Edge}} $\ast$b)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classEdge_a4b1c131507ae70dd5fef2dc27d1218fc}{twin}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to the twin edge of this edge \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classEdge_a93fd30fc006838e2767db3070e7af4fa}{next}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to the next edge of this edge \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classEdge_aa8c1ff2e0908416ae7611f95622c9acf}{prev}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to the previous edge of this edge \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classEdge_a32cdb5e57cb784ab8139a8ea789f9d4e}{org}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to the origin vertex of this edge \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classFace}{Face}} $\ast$ \mbox{\hyperlink{classEdge_aea78be2adf1973d160ad95c22650f0ef}{left}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to the face incident to the left of this edge \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to define a \mbox{\hyperlink{classDCEL}{DCEL}} edge. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEdge_a999f30c5004dc2b8c7ba9b07e6b6f2df}\label{classEdge_a999f30c5004dc2b8c7ba9b07e6b6f2df}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+org }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor function for \mbox{\hyperlink{classEdge}{Edge}} class 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+org} & pointer to the origin vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a48ee7cab8a01e332f65326585d5f3bb1}\label{classEdge_a48ee7cab8a01e332f65326585d5f3bb1}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+org,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{\+\_\+twin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Overload constructor function for \mbox{\hyperlink{classEdge}{Edge}} class 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+org} & pointer to the origin vertex \\
+\hline
+{\em \+\_\+twin} & pointer to the twin edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a563c0ce441769cc2875027caf78acfcc}\label{classEdge_a563c0ce441769cc2875027caf78acfcc}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+org,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+dest }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Overload constructor function for \mbox{\hyperlink{classEdge}{Edge}} class 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+org} & pointer to the origin vertex \\
+\hline
+{\em \+\_\+dest} & pointer to the destination vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a2f37b72f044427961d6730943daf10e0}\label{classEdge_a2f37b72f044427961d6730943daf10e0}} 
+\index{Edge@{Edge}!````~Edge@{$\sim$Edge}}
+\index{````~Edge@{$\sim$Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{$\sim$Edge()}{~Edge()}}
+{\footnotesize\ttfamily Edge\+::$\sim$\+Edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructor function for \mbox{\hyperlink{classEdge}{Edge}} class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEdge_aaf45c8bb48f4c857b167a567d2816d56}\label{classEdge_aaf45c8bb48f4c857b167a567d2816d56}} 
+\index{Edge@{Edge}!coincides@{coincides}}
+\index{coincides@{coincides}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{coincides()}{coincides()}}
+{\footnotesize\ttfamily static int Edge\+::coincides (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Static function to check if two edges coincide 
+\begin{DoxyParams}{Parameters}
+{\em a} & pointer to the first edge \\
+\hline
+{\em b} & pointer to the second edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a194babc54f01412d2cb083a953b2fb33}\label{classEdge_a194babc54f01412d2cb083a953b2fb33}} 
+\index{Edge@{Edge}!dest@{dest}}
+\index{dest@{dest}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{dest()}{dest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ Edge\+::dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function that returns the destination vertex of this edge \mbox{\Hypertarget{classEdge_a10b9e100d1cbfcee1259f6faeb81e1ea}\label{classEdge_a10b9e100d1cbfcee1259f6faeb81e1ea}} 
+\index{Edge@{Edge}!merge@{merge}}
+\index{merge@{merge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily static void Edge\+::merge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{a1,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{b1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Static function that performs the merge operation on two edges 
+\begin{DoxyParams}{Parameters}
+{\em a1} & pointer to the first edge \\
+\hline
+{\em b1} & pointer to the second edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a081e8e91b671f853a5ffe8cb5a63f27d}\label{classEdge_a081e8e91b671f853a5ffe8cb5a63f27d}} 
+\index{Edge@{Edge}!right@{right}}
+\index{right@{right}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{right()}{right()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFace}{Face}}$\ast$ Edge\+::right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function that returns the face incident to the right of this edge \mbox{\Hypertarget{classEdge_af3d75d26518f0cb1589ffd6fd48f0b65}\label{classEdge_af3d75d26518f0cb1589ffd6fd48f0b65}} 
+\index{Edge@{Edge}!setNext@{setNext}}
+\index{setNext@{setNext}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{setNext()}{setNext()}}
+{\footnotesize\ttfamily void Edge\+::set\+Next (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{e,  }\item[{bool}]{set\+Twins = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function that establishes the next and previous connections between this edge and another edge 
+\begin{DoxyParams}{Parameters}
+{\em e} & pointer to the edge with which we want to establish the relation \\
+\hline
+{\em set\+Twins} & when set, connects the twins of this edge and the given edge as well \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a7a495d88961c511b8f61aa9a9899a5ee}\label{classEdge_a7a495d88961c511b8f61aa9a9899a5ee}} 
+\index{Edge@{Edge}!splice@{splice}}
+\index{splice@{splice}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{splice()}{splice()}}
+{\footnotesize\ttfamily static void Edge\+::splice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{a1,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{a2,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{b1,  }\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{b2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Static function that performs the splice operation between two split edges 
+\begin{DoxyParams}{Parameters}
+{\em a1} & pointer to first half of first edge \\
+\hline
+{\em a2} & pointer to second half of first edge \\
+\hline
+{\em b1} & pointer to first half of second edge \\
+\hline
+{\em b2} & pointer to second half of second edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEdge_a2bec7240e46c960cce2810ff53b8e3fa}\label{classEdge_a2bec7240e46c960cce2810ff53b8e3fa}} 
+\index{Edge@{Edge}!split@{split}}
+\index{split@{split}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ Edge\+::split (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Overloaded function that splits this edge at its midpoint \mbox{\Hypertarget{classEdge_ab6832da3098b7f866dd0bd042c7b9f2b}\label{classEdge_ab6832da3098b7f866dd0bd042c7b9f2b}} 
+\index{Edge@{Edge}!split@{split}}
+\index{split@{split}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ Edge\+::split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function that splits this edge at given vertex by creating another edge 
+\begin{DoxyParams}{Parameters}
+{\em v} & pointer to the vertex to split the edge at \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classEdge_aea78be2adf1973d160ad95c22650f0ef}\label{classEdge_aea78be2adf1973d160ad95c22650f0ef}} 
+\index{Edge@{Edge}!left@{left}}
+\index{left@{left}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{left}{left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFace}{Face}}$\ast$ Edge\+::left = nullptr}
+
+
+
+pointer to the face incident to the left of this edge 
+
+\mbox{\Hypertarget{classEdge_a93fd30fc006838e2767db3070e7af4fa}\label{classEdge_a93fd30fc006838e2767db3070e7af4fa}} 
+\index{Edge@{Edge}!next@{next}}
+\index{next@{next}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ Edge\+::next = nullptr}
+
+
+
+pointer to the next edge of this edge 
+
+\mbox{\Hypertarget{classEdge_a32cdb5e57cb784ab8139a8ea789f9d4e}\label{classEdge_a32cdb5e57cb784ab8139a8ea789f9d4e}} 
+\index{Edge@{Edge}!org@{org}}
+\index{org@{org}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{org}{org}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ Edge\+::org = nullptr}
+
+
+
+pointer to the origin vertex of this edge 
+
+\mbox{\Hypertarget{classEdge_aa8c1ff2e0908416ae7611f95622c9acf}\label{classEdge_aa8c1ff2e0908416ae7611f95622c9acf}} 
+\index{Edge@{Edge}!prev@{prev}}
+\index{prev@{prev}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ Edge\+::prev = nullptr}
+
+
+
+pointer to the previous edge of this edge 
+
+\mbox{\Hypertarget{classEdge_a4b1c131507ae70dd5fef2dc27d1218fc}\label{classEdge_a4b1c131507ae70dd5fef2dc27d1218fc}} 
+\index{Edge@{Edge}!twin@{twin}}
+\index{twin@{twin}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{twin}{twin}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ Edge\+::twin = nullptr}
+
+
+
+pointer to the twin edge of this edge 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dcel_8hpp}{dcel.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,185 @@
+\hypertarget{classDCEL}{}\doxysection{DCEL Class Reference}
+\label{classDCEL}\index{DCEL@{DCEL}}
+
+
+{\ttfamily \#include $<$dcel.\+hpp$>$}
+
+
+
+Collaboration diagram for DCEL\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDCEL_a181f1f5242e06bc32417b806bbb20c03}{DCEL}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+start)
+\item 
+\mbox{\hyperlink{classDCEL_a78c68fa6128459ef32e8dc9c141e14ff}{DCEL}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist)
+\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classDCEL_a4cf22957b8fce5f6623384ddf8571c33}{for\+Edges\+Along}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$e, function$<$ void(\mbox{\hyperlink{classEdge}{Edge}} $\ast$)$>$ func, bool reverse=false)
+\item 
+\mbox{\hyperlink{classFace}{Face}} $\ast$ \mbox{\hyperlink{classDCEL_a19ee5154972b02baeef29f55c55ce8c4}{add\+Face\+Along}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$e, \mbox{\hyperlink{classFace}{Face}} $\ast$f=nullptr)
+\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classDCEL_adc66185e32f46ea1769cfac4d9579b29}{split\+Face}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$v1, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$v2, bool \&status)
+\item 
+\mbox{\hyperlink{classFace}{Face}} $\ast$ \mbox{\hyperlink{classDCEL_a003899bd05149d5aebae462ac6bff71b}{merge\+Face}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$d)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classDCEL_addc026fdcd15e29189f01afcc05b4e6b}{start}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to starting vertex of \mbox{\hyperlink{classDCEL}{DCEL}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classDCEL_a2a9f1f6ebbac6a74812ff465f73dafe4}{last}} = nullptr
+\begin{DoxyCompactList}\small\item\em pointer to last vertex of \mbox{\hyperlink{classDCEL}{DCEL}} \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{classFace}{Face}} $\ast$ $>$ \mbox{\hyperlink{classDCEL_a2d7fd9417422b18f18e8c55f1d1f49e2}{faces}}
+\begin{DoxyCompactList}\small\item\em Vector of faces in the \mbox{\hyperlink{classDCEL}{DCEL}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDCEL_ad95be5ea47a3e065ac3db8077ed8b11f}{n}} = 0
+\begin{DoxyCompactList}\small\item\em Number of vertices in the \mbox{\hyperlink{classDCEL}{DCEL}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDCEL_adfaafdd67e9522536dc263c852341f03}{add\+Vert}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to define a \mbox{\hyperlink{classDCEL}{DCEL}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDCEL_a181f1f5242e06bc32417b806bbb20c03}\label{classDCEL_a181f1f5242e06bc32417b806bbb20c03}} 
+\index{DCEL@{DCEL}!DCEL@{DCEL}}
+\index{DCEL@{DCEL}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{DCEL()}{DCEL()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily DCEL\+::\+DCEL (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor function for \mbox{\hyperlink{classDCEL}{DCEL}} class 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+start} & first vertex of the \mbox{\hyperlink{classDCEL}{DCEL}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDCEL_a78c68fa6128459ef32e8dc9c141e14ff}\label{classDCEL_a78c68fa6128459ef32e8dc9c141e14ff}} 
+\index{DCEL@{DCEL}!DCEL@{DCEL}}
+\index{DCEL@{DCEL}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{DCEL()}{DCEL()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily DCEL\+::\+DCEL (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&}]{vlist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Overloaded constructor function for \mbox{\hyperlink{classDCEL}{DCEL}} class 
+\begin{DoxyParams}{Parameters}
+{\em vlist} & vertices to be added to the \mbox{\hyperlink{classDCEL}{DCEL}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDCEL_a19ee5154972b02baeef29f55c55ce8c4}\label{classDCEL_a19ee5154972b02baeef29f55c55ce8c4}} 
+\index{DCEL@{DCEL}!addFaceAlong@{addFaceAlong}}
+\index{addFaceAlong@{addFaceAlong}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{addFaceAlong()}{addFaceAlong()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFace}{Face}}$\ast$ DCEL\+::add\+Face\+Along (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{e,  }\item[{\mbox{\hyperlink{classFace}{Face}} $\ast$}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to add the given face to chain of edges having the next connection from given edge 
+\begin{DoxyParams}{Parameters}
+{\em e} & pointer to the edge \\
+\hline
+{\em f} & pointer to the face; when null, new face is created \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDCEL_adfaafdd67e9522536dc263c852341f03}\label{classDCEL_adfaafdd67e9522536dc263c852341f03}} 
+\index{DCEL@{DCEL}!addVert@{addVert}}
+\index{addVert@{addVert}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{addVert()}{addVert()}}
+{\footnotesize\ttfamily void DCEL\+::add\+Vert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Function which adds a vertex to the \mbox{\hyperlink{classDCEL}{DCEL}} 
+\begin{DoxyParams}{Parameters}
+{\em v} & pointer to the vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDCEL_a4cf22957b8fce5f6623384ddf8571c33}\label{classDCEL_a4cf22957b8fce5f6623384ddf8571c33}} 
+\index{DCEL@{DCEL}!forEdgesAlong@{forEdgesAlong}}
+\index{forEdgesAlong@{forEdgesAlong}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{forEdgesAlong()}{forEdgesAlong()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ DCEL\+::for\+Edges\+Along (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{e,  }\item[{function$<$ void(\mbox{\hyperlink{classEdge}{Edge}} $\ast$)$>$}]{func,  }\item[{bool}]{reverse = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to iterate over chain of edges having the next connection from given edge 
+\begin{DoxyParams}{Parameters}
+{\em e} & pointer to the edge \\
+\hline
+{\em func} & function argument that is exectuted on each iterated edge \\
+\hline
+{\em reverse} & when set, iterates over chain of edges having the previous connection instead \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDCEL_a003899bd05149d5aebae462ac6bff71b}\label{classDCEL_a003899bd05149d5aebae462ac6bff71b}} 
+\index{DCEL@{DCEL}!mergeFace@{mergeFace}}
+\index{mergeFace@{mergeFace}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{mergeFace()}{mergeFace()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classFace}{Face}}$\ast$ DCEL\+::merge\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to merge two faces along the given edge 
+\begin{DoxyParams}{Parameters}
+{\em d} & pointer to the edge (a diagonal of the face) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDCEL_adc66185e32f46ea1769cfac4d9579b29}\label{classDCEL_adc66185e32f46ea1769cfac4d9579b29}} 
+\index{DCEL@{DCEL}!splitFace@{splitFace}}
+\index{splitFace@{splitFace}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{splitFace()}{splitFace()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}}$\ast$ DCEL\+::split\+Face (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v1,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v2,  }\item[{bool \&}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to split a face along given vertices if such a split does not already exist 
+\begin{DoxyParams}{Parameters}
+{\em v1} & pointer to the first vertex \\
+\hline
+{\em v2} & pointer to the second vertex \\
+\hline
+{\em status} & reference to a boolean; when unset, implies that such a split already existed \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDCEL_a2d7fd9417422b18f18e8c55f1d1f49e2}\label{classDCEL_a2d7fd9417422b18f18e8c55f1d1f49e2}} 
+\index{DCEL@{DCEL}!faces@{faces}}
+\index{faces@{faces}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{faces}{faces}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{classFace}{Face}}$\ast$$>$ DCEL\+::faces}
+
+
+
+Vector of faces in the \mbox{\hyperlink{classDCEL}{DCEL}}. 
+
+\mbox{\Hypertarget{classDCEL_a2a9f1f6ebbac6a74812ff465f73dafe4}\label{classDCEL_a2a9f1f6ebbac6a74812ff465f73dafe4}} 
+\index{DCEL@{DCEL}!last@{last}}
+\index{last@{last}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{last}{last}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ DCEL\+::last = nullptr}
+
+
+
+pointer to last vertex of \mbox{\hyperlink{classDCEL}{DCEL}} 
+
+\mbox{\Hypertarget{classDCEL_ad95be5ea47a3e065ac3db8077ed8b11f}\label{classDCEL_ad95be5ea47a3e065ac3db8077ed8b11f}} 
+\index{DCEL@{DCEL}!n@{n}}
+\index{n@{n}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int DCEL\+::n = 0}
+
+
+
+Number of vertices in the \mbox{\hyperlink{classDCEL}{DCEL}}. 
+
+\mbox{\Hypertarget{classDCEL_addc026fdcd15e29189f01afcc05b4e6b}\label{classDCEL_addc026fdcd15e29189f01afcc05b4e6b}} 
+\index{DCEL@{DCEL}!start@{start}}
+\index{start@{start}!DCEL@{DCEL}}
+\doxysubsubsection{\texorpdfstring{start}{start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ DCEL\+::start = nullptr}
+
+
+
+pointer to starting vertex of \mbox{\hyperlink{classDCEL}{DCEL}} 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{dcel_8hpp}{dcel.\+hpp}}\end{DoxyCompactItemize}

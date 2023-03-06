@@ -1,0 +1,224 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}physvector.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timer.\+hpp\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{main_8cpp_adf61cf300035374ce1f42d5c6917515c}{area}} (double x1, double y1, double x2, double y2, double x3, double y3)
+\item 
+bool \mbox{\hyperlink{main_8cpp_a99c7842ea27b05c020e2cb1a8cfa3c04}{is\+Interior}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$p, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$c)
+\item 
+bool \mbox{\hyperlink{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}{is\+Interior}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$p, double rect\mbox{[}4\mbox{]})
+\item 
+void \mbox{\hyperlink{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}{get\+Bound\+Rect}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ vlist, double \+\_\+rect\mbox{[}4\mbox{]})
+\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{main_8cpp_ac0a1397813fea580040c19ebc9b3b91c}{get\+Nxt}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
+\item 
+bool \mbox{\hyperlink{main_8cpp_a4e5d87a9aa3cbbb27a88eb089d98cbfd}{is\+Reflex}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$c)
+\item 
+void \mbox{\hyperlink{main_8cpp_ac9ef9f7a7c3f96d2d2360c8a72d18e69}{print\+Vlist}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist, bool cent\+Ang=true)
+\item 
+void \mbox{\hyperlink{main_8cpp_a6dc0ca24ce34af7768438097379b6e19}{print\+Vert}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
+\item 
+void \mbox{\hyperlink{main_8cpp_a8ba5b3e3b6d4a1e270646ff180f6cfbd}{print\+Edge}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$e)
+\item 
+void \mbox{\hyperlink{main_8cpp_a4558ba89a6df553f8faef23cdabd7e3d}{print\+DCEL}} (\mbox{\hyperlink{classDCEL}{DCEL}} \&dcel)
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_adf61cf300035374ce1f42d5c6917515c}\label{main_8cpp_adf61cf300035374ce1f42d5c6917515c}} 
+\index{main.cpp@{main.cpp}!area@{area}}
+\index{area@{area}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{area()}{area()}}
+{\footnotesize\ttfamily double area (\begin{DoxyParamCaption}\item[{double}]{x1,  }\item[{double}]{y1,  }\item[{double}]{x2,  }\item[{double}]{y2,  }\item[{double}]{x3,  }\item[{double}]{y3 }\end{DoxyParamCaption})}
+
+Returns the area of a triangle given its coordinates 
+\begin{DoxyParams}{Parameters}
+{\em x1} & x-\/coordinate of point 1 \\
+\hline
+{\em y1} & y-\/coordinate of point 1 \\
+\hline
+{\em x2} & x-\/coordinate of point 2 \\
+\hline
+{\em y2} & y-\/coordinate of point 2 \\
+\hline
+{\em x3} & x-\/coordinate of point 3 \\
+\hline
+{\em y3} & y-\/coordinate of point 4 \\
+\hline
+\end{DoxyParams}
+Area of Triangle formula using 3 point coordinates\mbox{\Hypertarget{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}\label{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}} 
+\index{main.cpp@{main.cpp}!getBoundRect@{getBoundRect}}
+\index{getBoundRect@{getBoundRect}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getBoundRect()}{getBoundRect()}}
+{\footnotesize\ttfamily void get\+Bound\+Rect (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$}]{vlist,  }\item[{double}]{\+\_\+rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+
+Finds the smallest rectangle that bounds all the specified vertices 
+\begin{DoxyParams}{Parameters}
+{\em vlist} & a list of vertices \\
+\hline
+{\em \+\_\+rect} & list describing the coordinates of the resultant rectangle \\
+\hline
+\end{DoxyParams}
+Lower rectangle edge parallel to x-\/axis
+
+Upper rectangle edge parallel to x-\/axis
+
+Left rectangle edge parallel to y-\/axis
+
+Right rectangle edge parallel to y-\/axis\mbox{\Hypertarget{main_8cpp_ac0a1397813fea580040c19ebc9b3b91c}\label{main_8cpp_ac0a1397813fea580040c19ebc9b3b91c}} 
+\index{main.cpp@{main.cpp}!getNxt@{getNxt}}
+\index{getNxt@{getNxt}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getNxt()}{getNxt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ get\+Nxt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&}]{vlist,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+Gives the next vertex of a given vertex 
+\begin{DoxyParams}{Parameters}
+{\em vlist} & a list of vertices \\
+\hline
+{\em v} & a vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}\label{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}} 
+\index{main.cpp@{main.cpp}!isInterior@{isInterior}}
+\index{isInterior@{isInterior}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{isInterior()}{isInterior()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool is\+Interior (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{p,  }\item[{double}]{rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+
+Checks if a point is interior to a rectangular region 
+\begin{DoxyParams}{Parameters}
+{\em p} & vertex to be checked for interiority \\
+\hline
+{\em rect} & integer array that describes the coordinates of the rectangular region \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a99c7842ea27b05c020e2cb1a8cfa3c04}\label{main_8cpp_a99c7842ea27b05c020e2cb1a8cfa3c04}} 
+\index{main.cpp@{main.cpp}!isInterior@{isInterior}}
+\index{isInterior@{isInterior}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{isInterior()}{isInterior()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool is\+Interior (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{c }\end{DoxyParamCaption})}
+
+Checks if a point is interior to the triangle bounded by three vertices 
+\begin{DoxyParams}{Parameters}
+{\em p} & vertex to be checked for interiority \\
+\hline
+{\em a} & first vertex \\
+\hline
+{\em b} & second vertex \\
+\hline
+{\em c} & third vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a4e5d87a9aa3cbbb27a88eb089d98cbfd}\label{main_8cpp_a4e5d87a9aa3cbbb27a88eb089d98cbfd}} 
+\index{main.cpp@{main.cpp}!isReflex@{isReflex}}
+\index{isReflex@{isReflex}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{isReflex()}{isReflex()}}
+{\footnotesize\ttfamily bool is\+Reflex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{c }\end{DoxyParamCaption})}
+
+Checks if the angle formed by three vertices is reflex or not 
+\begin{DoxyParams}{Parameters}
+{\em a} & vertex 1 \\
+\hline
+{\em b} & vertex 2 \\
+\hline
+{\em c} & vertex 3 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Main function A list of all vertices
+
+No. of vertices
+
+Variables to take vertex coordinates as input
+
+Taking vertex coordinate information in order of edges of initial polygon
+
+Making the initial Polygon in \mbox{\hyperlink{classDCEL}{DCEL}}
+
+A vector to store all the decomposed polygons
+
+A list of diagonals added to the polynomial
+
+Last vertex in remaining vertex list assigned v1
+
+The vertex next to v1 in the polynomial
+
+Adding the 2 vertices to the current convex polygon list
+
+Until the polygon covers all vertices. Check angle between (i-\/1)th,ith and (i+1)th vertex is Reflex.\+Check angle between ith, (i+1)th and 1st vertex is Reflex. Check angle between (i+1)th, 1st and 2nd vertex is Reflex. If one of the conditions is true then,the point cannot be added to current convex polygon.
+
+List of notches. Notches being vertices of polygon with reflexive inner angle.
+
+Adds vertex to notchlist if the vertex,it\textquotesingle{}s previous and it\textquotesingle{}s next form a reflexive angle.
+
+List of notches in the polygon not part of L\mbox{[}m\mbox{]}
+
+Check if the notch is a part of L\mbox{[}m\mbox{]}
+
+Check if the notch is a part of the smallest rectangle containing all vertices of L\mbox{[}m\mbox{]}. This acts as a preliminary check for a a notch being interior. As a definite check to the notch being in the interior of the \mbox{\hyperlink{classDCEL}{DCEL}}, we check if the notch tmp from LPVS is in the interior of the triangle formed by the 1st, (n -\/ 1) th and nth vertex using the function is\+Interior for the vertices. If inside, we reduce the size of the \mbox{\hyperlink{classDCEL}{DCEL}} until the notch is thrown out. This is done for all notches in the LPVS list.
+
+$<$ Checking if the polygon contains only 2 vertices
+
+$<$ Splitting a face wrt 2 edges
+
+$<$ Adding this newly formed diagonal to the list of diagonals
+
+The original algorithm for merging states 3 conditions to check and proceed with the merging process. These 3 conditions are handled by the definition of \mbox{\hyperlink{classDCEL}{DCEL}} as it encapsulates adjacency information. Hence the only super-\/condition to be checked is whether the vertices of the merged polygon would be non-\/reflex. We iterate through the list of diagonals and perform this check.
+
+Print the individual polygon \mbox{\hyperlink{classDCEL}{DCEL}} vertices using the print\+DCEL function.\mbox{\Hypertarget{main_8cpp_a4558ba89a6df553f8faef23cdabd7e3d}\label{main_8cpp_a4558ba89a6df553f8faef23cdabd7e3d}} 
+\index{main.cpp@{main.cpp}!printDCEL@{printDCEL}}
+\index{printDCEL@{printDCEL}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printDCEL()}{printDCEL()}}
+{\footnotesize\ttfamily void print\+DCEL (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDCEL}{DCEL}} \&}]{dcel }\end{DoxyParamCaption})}
+
+Prints the vertices of a \mbox{\hyperlink{classDCEL}{DCEL}} 
+\begin{DoxyParams}{Parameters}
+{\em dcel} & a doubly connected edge list \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_a8ba5b3e3b6d4a1e270646ff180f6cfbd}\label{main_8cpp_a8ba5b3e3b6d4a1e270646ff180f6cfbd}} 
+\index{main.cpp@{main.cpp}!printEdge@{printEdge}}
+\index{printEdge@{printEdge}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printEdge()}{printEdge()}}
+{\footnotesize\ttfamily void print\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{e }\end{DoxyParamCaption})}
+
+Prints the two vertices of an edge in the format (origin $<$=$>$ destination) \mbox{\Hypertarget{main_8cpp_a6dc0ca24ce34af7768438097379b6e19}\label{main_8cpp_a6dc0ca24ce34af7768438097379b6e19}} 
+\index{main.cpp@{main.cpp}!printVert@{printVert}}
+\index{printVert@{printVert}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printVert()}{printVert()}}
+{\footnotesize\ttfamily void print\+Vert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{v }\end{DoxyParamCaption})}
+
+Prints the x and y coordinates of a vertex 
+\begin{DoxyParams}{Parameters}
+{\em v} & vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_ac9ef9f7a7c3f96d2d2360c8a72d18e69}\label{main_8cpp_ac9ef9f7a7c3f96d2d2360c8a72d18e69}} 
+\index{main.cpp@{main.cpp}!printVlist@{printVlist}}
+\index{printVlist@{printVlist}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{printVlist()}{printVlist()}}
+{\footnotesize\ttfamily void print\+Vlist (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&}]{vlist,  }\item[{bool}]{cent\+Ang = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Prints the vertices of a vertex list 
+\begin{DoxyParams}{Parameters}
+{\em vlist} & a vertex list \\
+\hline
+{\em cent\+Ang} & boolean to conditionally print angle \\
+\hline
+\end{DoxyParams}

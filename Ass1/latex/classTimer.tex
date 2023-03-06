@@ -1,0 +1,101 @@
+\hypertarget{classTimer}{}\doxysection{Timer Class Reference}
+\label{classTimer}\index{Timer@{Timer}}
+
+
+{\ttfamily \#include $<$timer.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTimer_a5f16e8da27d2a5a5242dead46de05d97}{Timer}} ()
+\item 
+void \mbox{\hyperlink{classTimer_a4371ca647a520e1e05f83aad6488e1aa}{restart\+Clock}} ()
+\item 
+void \mbox{\hyperlink{classTimer_abcb0360714c837e3062f184f9a30f754}{stop\+Clock}} ()
+\item 
+int64\+\_\+t \mbox{\hyperlink{classTimer_a28808a231514a0297f5c5ad9de81e13e}{get\+Duration}} ()
+\item 
+\mbox{\hyperlink{classTimer}{Timer}} \mbox{\hyperlink{classTimer_ab1d7f098513a0d3d7ab4da804655c844}{operator=}} (\mbox{\hyperlink{classTimer}{Timer}} timer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+time\+\_\+point$<$ high\+\_\+resolution\+\_\+clock $>$ \mbox{\hyperlink{classTimer_ae41cf41d04ce9f943445446942f9fe75}{start}}
+\item 
+time\+\_\+point$<$ high\+\_\+resolution\+\_\+clock $>$ \mbox{\hyperlink{classTimer_a3b45e96ddad44ccf374571cd162e5774}{stop}}
+\begin{DoxyCompactList}\small\item\em start and stop timepoints \end{DoxyCompactList}\item 
+microseconds \mbox{\hyperlink{classTimer_ae8159a182e7916ce9f645560d0b7b61a}{duration}}
+\begin{DoxyCompactList}\small\item\em total microsecond duration \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to define a timer object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTimer_a5f16e8da27d2a5a5242dead46de05d97}\label{classTimer_a5f16e8da27d2a5a5242dead46de05d97}} 
+\index{Timer@{Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily Timer\+::\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor for \mbox{\hyperlink{classTimer}{Timer}} class, initializes start, stop and duration 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTimer_a28808a231514a0297f5c5ad9de81e13e}\label{classTimer_a28808a231514a0297f5c5ad9de81e13e}} 
+\index{Timer@{Timer}!getDuration@{getDuration}}
+\index{getDuration@{getDuration}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{getDuration()}{getDuration()}}
+{\footnotesize\ttfamily int64\+\_\+t Timer\+::get\+Duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to get total timer duration \mbox{\Hypertarget{classTimer_ab1d7f098513a0d3d7ab4da804655c844}\label{classTimer_ab1d7f098513a0d3d7ab4da804655c844}} 
+\index{Timer@{Timer}!operator=@{operator=}}
+\index{operator=@{operator=}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTimer}{Timer}} Timer\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTimer}{Timer}}}]{timer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Overloaded operator for \char`\"{}=\char`\"{} operation \mbox{\Hypertarget{classTimer_a4371ca647a520e1e05f83aad6488e1aa}\label{classTimer_a4371ca647a520e1e05f83aad6488e1aa}} 
+\index{Timer@{Timer}!restartClock@{restartClock}}
+\index{restartClock@{restartClock}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{restartClock()}{restartClock()}}
+{\footnotesize\ttfamily void Timer\+::restart\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to restart the timer \mbox{\Hypertarget{classTimer_abcb0360714c837e3062f184f9a30f754}\label{classTimer_abcb0360714c837e3062f184f9a30f754}} 
+\index{Timer@{Timer}!stopClock@{stopClock}}
+\index{stopClock@{stopClock}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{stopClock()}{stopClock()}}
+{\footnotesize\ttfamily void Timer\+::stop\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to stop the timer and add duration 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTimer_ae8159a182e7916ce9f645560d0b7b61a}\label{classTimer_ae8159a182e7916ce9f645560d0b7b61a}} 
+\index{Timer@{Timer}!duration@{duration}}
+\index{duration@{duration}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily microseconds Timer\+::duration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+total microsecond duration 
+
+\mbox{\Hypertarget{classTimer_ae41cf41d04ce9f943445446942f9fe75}\label{classTimer_ae41cf41d04ce9f943445446942f9fe75}} 
+\index{Timer@{Timer}!start@{start}}
+\index{start@{start}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{start}{start}}
+{\footnotesize\ttfamily time\+\_\+point$<$high\+\_\+resolution\+\_\+clock$>$ Timer\+::start\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classTimer_a3b45e96ddad44ccf374571cd162e5774}\label{classTimer_a3b45e96ddad44ccf374571cd162e5774}} 
+\index{Timer@{Timer}!stop@{stop}}
+\index{stop@{stop}!Timer@{Timer}}
+\doxysubsubsection{\texorpdfstring{stop}{stop}}
+{\footnotesize\ttfamily time\+\_\+point$<$high\+\_\+resolution\+\_\+clock$>$ Timer\+::stop\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+start and stop timepoints 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{timer_8hpp}{timer.\+hpp}}\end{DoxyCompactItemize}
