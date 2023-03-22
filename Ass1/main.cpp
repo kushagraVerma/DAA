@@ -102,6 +102,20 @@ bool isReflex(Vertex* a, Vertex* b, Vertex* c){
 }
 
 /**
+ * Checks if the vertices of a vertex list are in counter-clockwise order
+ * @param vlist a vertex list
+ */
+bool isCCW(vector<Vertex*> &vlist){
+    double summed = 0;
+    for(int i = 0; i < vlist.size()-1; i++){
+        Vertex* v1 = vlist[i];
+        Vertex* v2 = vlist[i+1];
+        summed += (v2->x - v1->x)*(v2->y + v1->y);
+    }
+    return summed < 0;
+}
+
+/**
  * Prints the vertices of a vertex list
  * @param vlist a vertex list
  * @param centAng boolean to conditionally print angle
@@ -160,15 +174,19 @@ int main(int argc, char *argv[]) {
     double x, y; /// Variables to take vertex coordinates as input
     cin >> n;
     /** Taking vertex coordinate information in order of edges of initial polygon */
+    set<pair<int,int> > unq;
     for (int i = 0; i < n; i++) {
         cin >> x >> y; 
-        vlist.push_back(new Vertex(x, y));
+        Vertex* v = new Vertex(x, y);
+        if(unq.insert({x,y}).second) vlist.push_back(v);
     }
 
     if(timeit){
         timer = Timer(); 
         timer_noprint = Timer();
     }
+
+    if(isCCW(vlist)) reverse(vlist.begin(),vlist.end());
 
     DCEL dcel(vlist); /// Making the initial Polygon in DCEL
 
@@ -202,6 +220,7 @@ int main(int argc, char *argv[]) {
             L[m].push_back(vlist[i + 1]);
             i++;
         }
+        
         vector<Vertex*> notchlist; /// List of notches. Notches being vertices of polygon with reflexive inner angle.
         for(i = 0; i < vlist.size(); i++){
             if (isReflex(vlist[(i + vlist.size() - 1) % vlist.size()], vlist[i], vlist[(i + 1) % vlist.size()])){
