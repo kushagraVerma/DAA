@@ -7,6 +7,7 @@
 {\ttfamily \#include \char`\"{}dcel.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}physvector.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}timer.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
 Include dependency graph for main.\+cpp\+:
 % FIG 0
 \doxysubsection*{Functions}
@@ -23,6 +24,8 @@ void \mbox{\hyperlink{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}{get\+Bound\+R
 \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{main_8cpp_ac0a1397813fea580040c19ebc9b3b91c}{get\+Nxt}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
 \item 
 bool \mbox{\hyperlink{main_8cpp_a4e5d87a9aa3cbbb27a88eb089d98cbfd}{is\+Reflex}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$c)
+\item 
+bool \mbox{\hyperlink{main_8cpp_aaa2e928abaa65ebc3255fbcc04326c41}{is\+CCW}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist)
 \item 
 void \mbox{\hyperlink{main_8cpp_ac9ef9f7a7c3f96d2d2360c8a72d18e69}{print\+Vlist}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist, bool cent\+Ang=true)
 \item 
@@ -88,6 +91,17 @@ Gives the next vertex of a given vertex
 {\em vlist} & a list of vertices \\
 \hline
 {\em v} & a vertex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aaa2e928abaa65ebc3255fbcc04326c41}\label{main_8cpp_aaa2e928abaa65ebc3255fbcc04326c41}} 
+\index{main.cpp@{main.cpp}!isCCW@{isCCW}}
+\index{isCCW@{isCCW}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{isCCW()}{isCCW()}}
+{\footnotesize\ttfamily bool is\+CCW (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&}]{vlist }\end{DoxyParamCaption})}
+
+Checks if the vertices of a vertex list are in counter-\/clockwise order 
+\begin{DoxyParams}{Parameters}
+{\em vlist} & a vertex list \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}\label{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}} 
