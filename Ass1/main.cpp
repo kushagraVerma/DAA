@@ -6,6 +6,7 @@
 #include "physvector.hpp"
 #include "timer.hpp"
 #include <limits.h>
+#include <fstream>
 
 using namespace std;
 /**
@@ -167,17 +168,18 @@ void printDCEL(DCEL &dcel){
  * Main function
  */
 int main(int argc, char *argv[]) {
+    ifstream fin(argv[2]);
     Timer timer,timer_noprint,timer_decomp,timer_merge;
     bool timeit = (argc>1 && string(argv[1]).compare(string("--time"))==0);
 
     vector<Vertex*> vlist; /// A list of all vertices
     int n; /// No. of vertices
     double x, y; /// Variables to take vertex coordinates as input
-    cin >> n;
+    fin >> n;
     /** Taking vertex coordinate information in order of edges of initial polygon */
     set<pair<double,double> > unq;
     for (int i = 0; i < n; i++) {
-        cin >> x >> y; 
+        fin >> x >> y; 
         Vertex* v = new Vertex(x, y);
         if(unq.insert({x,y}).second) vlist.push_back(v);
     }
