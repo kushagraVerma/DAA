@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
     double x, y; /// Variables to take vertex coordinates as input
     cin >> n;
     /** Taking vertex coordinate information in order of edges of initial polygon */
-    set<pair<int,int> > unq;
+    set<pair<double,double> > unq;
     for (int i = 0; i < n; i++) {
         cin >> x >> y; 
         Vertex* v = new Vertex(x, y);
