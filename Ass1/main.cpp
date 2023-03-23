@@ -5,6 +5,7 @@
 #include "dcel.hpp"
 #include "physvector.hpp"
 #include "timer.hpp"
+#include <limits.h>
 
 using namespace std;
 /**
