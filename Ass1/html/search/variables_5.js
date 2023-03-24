@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['magnitude_152',['magnitude',['../classPhysicalVector.html#ac5e630c05d92b39b91c773fe85026c9d',1,'PhysicalVector']]]
+  ['magnitude_152',['magnitude',['../classPhysicalVector.html#a6e6c190b93ac702a9b1a41621a677431',1,'PhysicalVector']]]
 ];

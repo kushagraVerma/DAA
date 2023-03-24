@@ -18,8 +18,8 @@ using namespace std;
  * @param x3 x-coordinate of point 3
  * @param y3 y-coordinate of point 4
  */
-double area(double x1, double y1, double x2, double y2, double x3, double y3) {
-    double total = 0.5 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)); /** Area of Triangle formula using 3 point coordinates*/
+long double area(long double x1, long double y1, long double x2, long double y2, long double x3, long double y3) {
+    long double total = 0.5 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)); /** Area of Triangle formula using 3 point coordinates*/
     if(total < 0) total *= -1;
     return total;
 }
@@ -32,10 +32,10 @@ double area(double x1, double y1, double x2, double y2, double x3, double y3) {
  * @param c third vertex
  */
 bool isInterior(Vertex* p, Vertex* a, Vertex* b, Vertex* c) {
-    double a1 = area(toCoord(p), toCoord(a), toCoord(b));
-    double a2 = area(toCoord(p), toCoord(b), toCoord(c));
-    double a3 = area(toCoord(p), toCoord(a), toCoord(c));
-    double total = area(toCoord(a), toCoord(b), toCoord(c));
+    long double a1 = area(toCoord(p), toCoord(a), toCoord(b));
+    long double a2 = area(toCoord(p), toCoord(b), toCoord(c));
+    long double a3 = area(toCoord(p), toCoord(a), toCoord(c));
+    long double total = area(toCoord(a), toCoord(b), toCoord(c));
     return abs(total - (a1 + a2 + a3))<(1e-12);
 }
 
@@ -44,7 +44,7 @@ bool isInterior(Vertex* p, Vertex* a, Vertex* b, Vertex* c) {
  * @param p vertex to be checked for interiority
  * @param rect integer array that describes the coordinates of the rectangular region
  */
-bool isInterior(Vertex* p, double rect[4]) {
+bool isInterior(Vertex* p, long double rect[4]) {
     return (((p -> x) > rect[0]) && ((p -> x) < rect[1]) && ((p -> y) > rect[2]) && ((p -> y) < rect[3]));
 }
 
@@ -53,8 +53,8 @@ bool isInterior(Vertex* p, double rect[4]) {
  * @param vlist a list of vertices
  * @param _rect list describing the coordinates of the resultant rectangle
  */
-void getBoundRect(vector<Vertex*> vlist, double _rect[4]){
-    double rect[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
+void getBoundRect(vector<Vertex*> vlist, long double _rect[4]){
+    long double rect[] = {INT_MAX, INT_MIN, INT_MAX, INT_MIN};
     for(int j = 0; j < vlist.size(); j++) {
         if (rect[0] > vlist[j] -> x) {/// Lower rectangle edge parallel to x-axis
             rect[0] = vlist[j] -> x;
@@ -108,7 +108,7 @@ bool isReflex(Vertex* a, Vertex* b, Vertex* c){
  * @param vlist a vertex list
  */
 bool isCCW(vector<Vertex*> &vlist){
-    double summed = 0;
+    long double summed = 0;
     for(int i = 0; i < vlist.size()-1; i++){
         Vertex* v1 = vlist[i];
         Vertex* v2 = vlist[i+1];
@@ -166,18 +166,36 @@ void printDCEL(DCEL &dcel){
 
 /**
  * Main function
+ The main function is an aggregation of all the functions and classes defined. We declare a list of vertices called vlist. 
+We populate vlist with the given input, handling duplicates on the fly. With this vlist, we populate the DCEL. 
+Additionally, we declare a vector of vector of vertices called L to store all the decomposed polygons, and a list of edges 
+to store diagonals. Until the polygon covers all vertices. Check angle between (i-1)th,ith and (i+1)th vertex is Reflex.
+Check angle between ith, (i+1)th and 1st vertex is Reflex. Check angle between (i+1)th, 1st and 2nd vertex is Reflex. 
+If one of the conditions is true then, the point cannot be added to current convex polygon. 
+We use a list of vertices to store all the notches, which adds vertex to notchlist if the vertex,
+it's previous and it's next form a reflexive angle. We check if the notch is a part of the smallest rectangle containing all vertices of L[m].
+This acts as a preliminary check for a notch being interior. As a definite check to the notch being in the interior of the DCEL, 
+we check if the notch tmp from LPVS is in the interior of the triangle formed by the 1st, (n - 1) th and nth vertex using the function
+isInterior for the vertices. If inside, we reduce the size of the DCEL until the notch is thrown out. This is done for all notches in the LPVS list.
+We perform a check for the polygon, to see whether there are only two vertices left. If not, we split the face, removing it from the main polygon,
+and adding a newly formed egde to the list of diagonals.
+The original algorithm for merging states 3 conditions to check and proceed with the merging process.
+These 3 conditions are handled by the definition of DCEL as it encapsulates adjacency information. 
+Hence the only super-condition to be checked is whether the vertices of the merged polygon would be non-reflex.
+We iterate through the list of diagonals and perform this check.
+
  */
 int main(int argc, char *argv[]) {
     ifstream fin(argv[2]);
     Timer timer,timer_noprint,timer_decomp,timer_merge;
     bool timeit = (argc>1 && string(argv[1]).compare(string("--time"))==0);
 
-    vector<Vertex*> vlist; /// A list of all vertices
-    int n; /// No. of vertices
-    double x, y; /// Variables to take vertex coordinates as input
+    vector<Vertex*> vlist; // A list of all vertices
+    int n; // No. of vertices
+    long double x, y; // Variables to take vertex coordinates as input
     fin >> n;
     /** Taking vertex coordinate information in order of edges of initial polygon */
-    set<pair<double,double> > unq;
+    set<pair<long double,long double> > unq;
     for (int i = 0; i < n; i++) {
         fin >> x >> y; 
         Vertex* v = new Vertex(x, y);
@@ -191,7 +209,7 @@ int main(int argc, char *argv[]) {
 
     if(isCCW(vlist)) reverse(vlist.begin(),vlist.end());
 
-    DCEL dcel(vlist); /// Making the initial Polygon in DCEL
+    DCEL dcel(vlist); // Making the initial Polygon in DCEL
 
     if(timeit){
         timer_noprint.stopClock();
@@ -204,15 +222,15 @@ int main(int argc, char *argv[]) {
         timer_decomp = Timer();
     }
     
-    vector<vector<Vertex*>> L(1, vector<Vertex*>(1,vlist[0])); /// A vector to store all the decomposed polygons
-    vector<Edge*> diagonals(0); /// A list of diagonals added to the polynomial 
+    vector<vector<Vertex*>> L(1, vector<Vertex*>(1,vlist[0])); // A vector to store all the decomposed polygons
+    vector<Edge*> diagonals(0); // A list of diagonals added to the polynomial 
     
     for (int m = 1; vlist.size() > 3; m++) {
-        Vertex* v1 = *L[m - 1].rbegin(); /// Last vertex in remaining vertex list assigned v1
-        Vertex* v2 = getNxt(vlist, v1); /// The vertex next to v1 in the polynomial
-        L.push_back({v1, v2}); /// Adding the 2 vertices to the current convex polygon list
+        Vertex* v1 = *L[m - 1].rbegin(); // Last vertex in remaining vertex list assigned v1
+        Vertex* v2 = getNxt(vlist, v1); // The vertex next to v1 in the polynomial
+        L.push_back({v1, v2}); // Adding the 2 vertices to the current convex polygon list
         int i = 1;
-        /** Until the polygon covers all vertices. Check angle between (i-1)th,ith and (i+1)th vertex is Reflex.Check angle between ith, (i+1)th and 1st vertex is Reflex.
+        /* Until the polygon covers all vertices. Check angle between (i-1)th,ith and (i+1)th vertex is Reflex.Check angle between ith, (i+1)th and 1st vertex is Reflex.
          Check angle between (i+1)th, 1st and 2nd vertex is Reflex. If one of the conditions is true then,the point cannot be added to current convex polygon. */
         while (L[m].size() < vlist.size()){ 
             if (isReflex(vlist[i - 1], vlist[i], vlist[i + 1]) 
@@ -224,19 +242,19 @@ int main(int argc, char *argv[]) {
             i++;
         }
         
-        vector<Vertex*> notchlist; /// List of notches. Notches being vertices of polygon with reflexive inner angle.
+        vector<Vertex*> notchlist; // List of notches. Notches being vertices of polygon with reflexive inner angle.
         for(i = 0; i < vlist.size(); i++){
             if (isReflex(vlist[(i + vlist.size() - 1) % vlist.size()], vlist[i], vlist[(i + 1) % vlist.size()])){
-                notchlist.push_back(vlist[i]); /// Adds vertex to notchlist if the vertex,it's previous and it's next form a reflexive angle.
+                notchlist.push_back(vlist[i]); // Adds vertex to notchlist if the vertex,it's previous and it's next form a reflexive angle.
             }
         }
         if(L[m].size() != vlist.size()) {
-            vector<Vertex*> LPVS; /// List of notches in the polygon not part of L[m]
+            vector<Vertex*> LPVS; // List of notches in the polygon not part of L[m]
             
             for (int j = 0; j < notchlist.size(); j++) {
                 int chk = 0;
                 for (int k = 0; k < L[m].size(); k++) {
-                    if (Vertex::coincides(notchlist[j], L[m][k])){ /// Check if the notch is a part of L[m]
+                    if (Vertex::coincides(notchlist[j], L[m][k])){ // Check if the notch is a part of L[m]
                         chk = 1;
                         break;
                     }
@@ -245,12 +263,12 @@ int main(int argc, char *argv[]) {
                     LPVS.push_back(notchlist[j]);
                 }
             }
-            /** Check if the notch is a part of the smallest rectangle containing all vertices of L[m]. This acts as a preliminary check for a 
+            /* Check if the notch is a part of the smallest rectangle containing all vertices of L[m]. This acts as a preliminary check for a 
             a notch being interior. As a definite check to the notch being in the interior of the DCEL, we check if the notch tmp from LPVS
             is in the interior of the triangle formed by the 1st, (n - 1) th and nth vertex using the function isInterior for the vertices. If inside, we 
             reduce the size of the DCEL until the notch is thrown out. This is done for all notches in the LPVS list.*/
             while (LPVS.size() > 0) { 
-                double rect[4];
+                long double rect[4];
                 getBoundRect(L[m], rect);
                 bool Backward = false;
                 while(!Backward && LPVS.size() > 0){
@@ -284,10 +302,10 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
-        if (L[m].back() != vlist[1]) { ///< Checking if the polygon contains only 2 vertices
+        if (L[m].back() != vlist[1]) { //< Checking if the polygon contains only 2 vertices
             bool status;
-            Edge* e = dcel.splitFace(L[m].front(), L[m].back(), status); ///< Splitting a face wrt 2 edges 
-            if (status) diagonals.push_back(e); ///< Adding this newly formed diagonal to the list of diagonals 
+            Edge* e = dcel.splitFace(L[m].front(), L[m].back(), status); //< Splitting a face wrt 2 edges 
+            if (status) diagonals.push_back(e); //< Adding this newly formed diagonal to the list of diagonals 
 
             vector<Vertex*> vlist_;
             for (auto v : vlist){
@@ -322,7 +340,7 @@ int main(int argc, char *argv[]) {
         timer_merge = Timer();
     }
     
-    /**The original algorithm for merging states 3 conditions to check and proceed with the merging process.
+    /*The original algorithm for merging states 3 conditions to check and proceed with the merging process.
      These 3 conditions are handled by the definition of DCEL as it encapsulates adjacency information. 
      Hence the only super-condition to be checked is whether the vertices of the merged polygon would be non-reflex.
      We iterate through the list of diagonals and perform this check.*/
@@ -342,7 +360,7 @@ int main(int argc, char *argv[]) {
         timer_merge.stopClock();
     }
     
-    /**Print the individual polygon DCEL vertices using the printDCEL function.*/
+    /*Print the individual polygon DCEL vertices using the printDCEL function.*/
     cout << "\nAfter merging: " << dcel.faces.size() << " polygons" << endl;
     printDCEL(dcel); 
 

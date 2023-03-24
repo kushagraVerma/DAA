@@ -75,6 +75,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="physvector_8hpp_source.html">physvector.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="timer_8hpp_source.html">timer.hpp</a>&quot;</code><br />
 <code>#include &lt;limits.h&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
@@ -83,14 +84,14 @@ Include dependency graph for main.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adf61cf300035374ce1f42d5c6917515c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#adf61cf300035374ce1f42d5c6917515c">area</a> (double x1, double y1, double x2, double y2, double x3, double y3)</td></tr>
-<tr class="separator:adf61cf300035374ce1f42d5c6917515c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36436d4ae44ef1810f36adf63e10ca5"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ab36436d4ae44ef1810f36adf63e10ca5">area</a> (long double x1, long double y1, long double x2, long double y2, long double x3, long double y3)</td></tr>
+<tr class="separator:ab36436d4ae44ef1810f36adf63e10ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99c7842ea27b05c020e2cb1a8cfa3c04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a99c7842ea27b05c020e2cb1a8cfa3c04">isInterior</a> (<a class="el" href="classVertex.html">Vertex</a> *p, <a class="el" href="classVertex.html">Vertex</a> *a, <a class="el" href="classVertex.html">Vertex</a> *b, <a class="el" href="classVertex.html">Vertex</a> *c)</td></tr>
 <tr class="separator:a99c7842ea27b05c020e2cb1a8cfa3c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d8ce155c5ed7aa69fd966ed11e3e39b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4d8ce155c5ed7aa69fd966ed11e3e39b">isInterior</a> (<a class="el" href="classVertex.html">Vertex</a> *p, double rect[4])</td></tr>
-<tr class="separator:a4d8ce155c5ed7aa69fd966ed11e3e39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa91cfa22e47edf0f67c7707bd7838033"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa91cfa22e47edf0f67c7707bd7838033">getBoundRect</a> (vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt; vlist, double _rect[4])</td></tr>
-<tr class="separator:aa91cfa22e47edf0f67c7707bd7838033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa03a566d1ee68f6e82e271ba897262"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a8fa03a566d1ee68f6e82e271ba897262">isInterior</a> (<a class="el" href="classVertex.html">Vertex</a> *p, long double rect[4])</td></tr>
+<tr class="separator:a8fa03a566d1ee68f6e82e271ba897262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01f7dff699257f6950d4120d275644fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a01f7dff699257f6950d4120d275644fd">getBoundRect</a> (vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt; vlist, long double _rect[4])</td></tr>
+<tr class="separator:a01f7dff699257f6950d4120d275644fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0a1397813fea580040c19ebc9b3b91c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac0a1397813fea580040c19ebc9b3b91c">getNxt</a> (vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt; &amp;vlist, <a class="el" href="classVertex.html">Vertex</a> *v)</td></tr>
 <tr class="separator:ac0a1397813fea580040c19ebc9b3b91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e5d87a9aa3cbbb27a88eb089d98cbfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4e5d87a9aa3cbbb27a88eb089d98cbfd">isReflex</a> (<a class="el" href="classVertex.html">Vertex</a> *a, <a class="el" href="classVertex.html">Vertex</a> *b, <a class="el" href="classVertex.html">Vertex</a> *c)</td></tr>
@@ -109,46 +110,46 @@ Functions</h2></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="adf61cf300035374ce1f42d5c6917515c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf61cf300035374ce1f42d5c6917515c">&#9670;&nbsp;</a></span>area()</h2>
+<a id="ab36436d4ae44ef1810f36adf63e10ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab36436d4ae44ef1810f36adf63e10ca5">&#9670;&nbsp;</a></span>area()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double area </td>
+          <td class="memname">long double area </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>x1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>y1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>x2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>y2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>x3</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>y3</em>&#160;</td>
         </tr>
         <tr>
@@ -173,8 +174,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa91cfa22e47edf0f67c7707bd7838033"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa91cfa22e47edf0f67c7707bd7838033">&#9670;&nbsp;</a></span>getBoundRect()</h2>
+<a id="a01f7dff699257f6950d4120d275644fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f7dff699257f6950d4120d275644fd">&#9670;&nbsp;</a></span>getBoundRect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +189,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>_rect</em>[4]&#160;</td>
         </tr>
         <tr>
@@ -271,8 +272,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4d8ce155c5ed7aa69fd966ed11e3e39b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d8ce155c5ed7aa69fd966ed11e3e39b">&#9670;&nbsp;</a></span>isInterior() <span class="overload">[1/2]</span></h2>
+<a id="a8fa03a566d1ee68f6e82e271ba897262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa03a566d1ee68f6e82e271ba897262">&#9670;&nbsp;</a></span>isInterior() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +287,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">long double&#160;</td>
           <td class="paramname"><em>rect</em>[4]&#160;</td>
         </tr>
         <tr>

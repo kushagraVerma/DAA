@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['physicalvector_48',['PhysicalVector',['../classPhysicalVector.html',1,'PhysicalVector'],['../classPhysicalVector.html#a7aad4c02c4de2f8402eff82ca5c1293c',1,'PhysicalVector::PhysicalVector(double _x, double _y)'],['../classPhysicalVector.html#a71e07138e8bf39eecf6ab83db262771a',1,'PhysicalVector::PhysicalVector(double x1, double y1, double x2, double y2)']]],
+  ['physicalvector_48',['PhysicalVector',['../classPhysicalVector.html',1,'PhysicalVector'],['../classPhysicalVector.html#ae75576a4ccc234fbed953819ede3fddf',1,'PhysicalVector::PhysicalVector(long double _x, long double _y)'],['../classPhysicalVector.html#aed161e9415aa49b5f7b9a48f2a8f90fe',1,'PhysicalVector::PhysicalVector(long double x1, long double y1, long double x2, long double y2)']]],
   ['physvector_2ehpp_49',['physvector.hpp',['../physvector_8hpp.html',1,'']]],
-  ['pi_50',['PI',['../physvector_8hpp.html#a952eac791b596a61bba0a133a3bb439f',1,'physvector.hpp']]],
+  ['pi_50',['PI',['../physvector_8hpp.html#acf20630e5d2a9696928fe77b0726013c',1,'physvector.hpp']]],
   ['prev_51',['prev',['../classEdge.html#aa8c1ff2e0908416ae7611f95622c9acf',1,'Edge']]],
   ['prevv_52',['prevV',['../classVertex.html#a43a01229d3717d605abcf5d7acba5b15',1,'Vertex']]],
   ['printdcel_53',['printDCEL',['../main_8cpp.html#a4558ba89a6df553f8faef23cdabd7e3d',1,'main.cpp']]],

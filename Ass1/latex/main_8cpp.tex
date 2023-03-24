@@ -8,18 +8,19 @@
 {\ttfamily \#include \char`\"{}physvector.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}timer.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
 Include dependency graph for main.\+cpp\+:
 % FIG 0
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{main_8cpp_adf61cf300035374ce1f42d5c6917515c}{area}} (double x1, double y1, double x2, double y2, double x3, double y3)
+long double \mbox{\hyperlink{main_8cpp_ab36436d4ae44ef1810f36adf63e10ca5}{area}} (long double x1, long double y1, long double x2, long double y2, long double x3, long double y3)
 \item 
 bool \mbox{\hyperlink{main_8cpp_a99c7842ea27b05c020e2cb1a8cfa3c04}{is\+Interior}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$p, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$a, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$b, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$c)
 \item 
-bool \mbox{\hyperlink{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}{is\+Interior}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$p, double rect\mbox{[}4\mbox{]})
+bool \mbox{\hyperlink{main_8cpp_a8fa03a566d1ee68f6e82e271ba897262}{is\+Interior}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$p, long double rect\mbox{[}4\mbox{]})
 \item 
-void \mbox{\hyperlink{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}{get\+Bound\+Rect}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ vlist, double \+\_\+rect\mbox{[}4\mbox{]})
+void \mbox{\hyperlink{main_8cpp_a01f7dff699257f6950d4120d275644fd}{get\+Bound\+Rect}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ vlist, long double \+\_\+rect\mbox{[}4\mbox{]})
 \item 
 \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{main_8cpp_ac0a1397813fea580040c19ebc9b3b91c}{get\+Nxt}} (vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&vlist, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$v)
 \item 
@@ -40,11 +41,11 @@ int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int ar
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{main_8cpp_adf61cf300035374ce1f42d5c6917515c}\label{main_8cpp_adf61cf300035374ce1f42d5c6917515c}} 
+\mbox{\Hypertarget{main_8cpp_ab36436d4ae44ef1810f36adf63e10ca5}\label{main_8cpp_ab36436d4ae44ef1810f36adf63e10ca5}} 
 \index{main.cpp@{main.cpp}!area@{area}}
 \index{area@{area}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{area()}{area()}}
-{\footnotesize\ttfamily double area (\begin{DoxyParamCaption}\item[{double}]{x1,  }\item[{double}]{y1,  }\item[{double}]{x2,  }\item[{double}]{y2,  }\item[{double}]{x3,  }\item[{double}]{y3 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily long double area (\begin{DoxyParamCaption}\item[{long double}]{x1,  }\item[{long double}]{y1,  }\item[{long double}]{x2,  }\item[{long double}]{y2,  }\item[{long double}]{x3,  }\item[{long double}]{y3 }\end{DoxyParamCaption})}
 
 Returns the area of a triangle given its coordinates 
 \begin{DoxyParams}{Parameters}
@@ -61,11 +62,11 @@ Returns the area of a triangle given its coordinates
 {\em y3} & y-\/coordinate of point 4 \\
 \hline
 \end{DoxyParams}
-Area of Triangle formula using 3 point coordinates\mbox{\Hypertarget{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}\label{main_8cpp_aa91cfa22e47edf0f67c7707bd7838033}} 
+Area of Triangle formula using 3 point coordinates\mbox{\Hypertarget{main_8cpp_a01f7dff699257f6950d4120d275644fd}\label{main_8cpp_a01f7dff699257f6950d4120d275644fd}} 
 \index{main.cpp@{main.cpp}!getBoundRect@{getBoundRect}}
 \index{getBoundRect@{getBoundRect}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{getBoundRect()}{getBoundRect()}}
-{\footnotesize\ttfamily void get\+Bound\+Rect (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$}]{vlist,  }\item[{double}]{\+\_\+rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void get\+Bound\+Rect (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$}]{vlist,  }\item[{long double}]{\+\_\+rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
 
 Finds the smallest rectangle that bounds all the specified vertices 
 \begin{DoxyParams}{Parameters}
@@ -104,11 +105,11 @@ Checks if the vertices of a vertex list are in counter-\/clockwise order
 {\em vlist} & a vertex list \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}\label{main_8cpp_a4d8ce155c5ed7aa69fd966ed11e3e39b}} 
+\mbox{\Hypertarget{main_8cpp_a8fa03a566d1ee68f6e82e271ba897262}\label{main_8cpp_a8fa03a566d1ee68f6e82e271ba897262}} 
 \index{main.cpp@{main.cpp}!isInterior@{isInterior}}
 \index{isInterior@{isInterior}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{isInterior()}{isInterior()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool is\+Interior (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{p,  }\item[{double}]{rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool is\+Interior (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{p,  }\item[{long double}]{rect\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
 
 Checks if a point is interior to a rectangular region 
 \begin{DoxyParams}{Parameters}

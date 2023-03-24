@@ -30,7 +30,7 @@ class Face{
 */
 class Vertex{
     public:
-        double x = 0.0, y = 0.0; ///< Coordinate points of the vertex in two dimensional Cartesian plane
+        long double x = 0.0, y = 0.0; ///< Coordinate points of the vertex in two dimensional Cartesian plane
         Edge* inc_edge = nullptr; ///< pointer to any incident edge
 
         /**
@@ -38,7 +38,7 @@ class Vertex{
          * @param _x x-coordinate of the vertex
          * @param _y y-coordinate of the vertex
         */
-        Vertex(double _x, double _y){ 
+        Vertex(long double _x, long double _y){ 
             x = _x; y = _y;
         }
 
@@ -64,7 +64,7 @@ class Vertex{
          * @param vlist vector of vertices
         */
         static Vertex* centroid(vector<Vertex*> &vlist){
-            double centroidX = 0, centroidY = 0;
+            long double centroidX = 0, centroidY = 0;
             for(auto v : vlist){
                 centroidX += v -> x;
                 centroidY += v -> y;

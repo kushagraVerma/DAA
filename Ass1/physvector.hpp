@@ -3,16 +3,16 @@
 
 #include <cmath>
 
-const double PI = acos(-1);
+const long double PI = acos(-1);
 
 /**
  * A class to define a physical vector
  */
 class PhysicalVector{
     private:
-        double x = 0.0, y = 0.0; ///< Coordinates of the tail of the vector
-        double magnitude = 0.0; ///< Magnitude of the vector
-        double angle = 0.0; ///< Angle subtended by the vector wrt the x-axis in anticlockwise direction
+        long double x = 0.0, y = 0.0; ///< Coordinates of the tail of the vector
+        long double magnitude = 0.0; ///< Magnitude of the vector
+        long double angle = 0.0; ///< Angle subtended by the vector wrt the x-axis in anticlockwise direction
         void update(){
             magnitude = sqrt(x * x + y * y);
             /** Case handling zero vector */
@@ -29,7 +29,7 @@ class PhysicalVector{
          * @param _x x-coordinate of head
          * @param _y y-coordinate of head
          */
-        PhysicalVector(double _x, double _y){
+        PhysicalVector(long double _x, long double _y){
             x = _x; y = _y;
             update();
         }
@@ -41,28 +41,28 @@ class PhysicalVector{
          * @param x2 x-coordinate of head
          * @param y2 y-coordinate of head
          */
-        PhysicalVector(double x1, double y1, double x2, double y2) : PhysicalVector(x2 - x1, y2 - y1){}
+        PhysicalVector(long double x1, long double y1, long double x2, long double y2) : PhysicalVector(x2 - x1, y2 - y1){}
 
         /**
          * Getter function for start coordinates of the vector
-         * @param _x reference to a double, takes the value of the x-coordinate
-         * @param _y reference to a double, takes the value of the y-coordinate
+         * @param _x reference to a long double, takes the value of the x-coordinate
+         * @param _y reference to a long double, takes the value of the y-coordinate
          */
-        void getXY(double& _x, double& _y){
+        void getXY(long double& _x, long double& _y){
             _x = x; _y = y;
         }
 
         /**
          * Getter function for magnitude of the vector
          */
-        double getMagnitude(){
+        long double getMagnitude(){
             return magnitude;
         }
 
         /**
          * Getter function for angle of the vector
          */
-        double getAngle(){
+        long double getAngle(){
             return angle;
         }
 
@@ -70,7 +70,7 @@ class PhysicalVector{
          * Conversion function for radians to degrees
          * @param theta angle value in radians
          */
-        static double toDegree(double theta){
+        static long double toDegree(long double theta){
             return (theta * 180) / PI;
         }
 
@@ -78,7 +78,7 @@ class PhysicalVector{
          * Conversion function for degrees to radians
          * @param theta angle value in degrees
          */
-        static double toRadian(double theta){
+        static long double toRadian(long double theta){
             return (theta * PI) / 180;
         }
 
@@ -87,10 +87,10 @@ class PhysicalVector{
          * @param from a physical vector
          * @param to a physical vector
          */
-        static double angleBetween(PhysicalVector from, PhysicalVector to){
-            double toAngle = to.angle, fromAngle = from.angle;
+        static long double angleBetween(PhysicalVector from, PhysicalVector to){
+            long double toAngle = to.angle, fromAngle = from.angle;
             if(toAngle == INFINITY || fromAngle == INFINITY) return INFINITY;
-            double theta = toAngle - fromAngle;
+            long double theta = toAngle - fromAngle;
             if(theta < 0) theta += 2 * PI;
             return theta;
         }
@@ -104,7 +104,7 @@ class PhysicalVector{
          * @param x3 x-coordinate of 3rd point (head of 2nd vector)
          * @param y3 y-coordinate of 3rd point (head of 2nd vector)
          */
-        static double angleBetween(double x1, double y1, double x2, double y2, double x3, double y3){
+        static long double angleBetween(long double x1, long double y1, long double x2, long double y2, long double x3, long double y3){
             PhysicalVector from(x2, y2, x1, y1), to(x2, y2, x3, y3);
             return angleBetween(from, to);
         }
@@ -113,9 +113,9 @@ class PhysicalVector{
          * Returns a rotated vector rotated by an angle theta
          * @param theta angle offset
          */
-        PhysicalVector rotated(double theta){
+        PhysicalVector rotated(long double theta){
             if(angle == INFINITY) return *this;
-            double a_ = angle + theta;
+            long double a_ = angle + theta;
             return PhysicalVector(magnitude * cos(a_), magnitude * sin(a_));
         }
 
@@ -123,7 +123,7 @@ class PhysicalVector{
          * Assigns the rotated physical vector to the current vector
          * @param theta angle offset
          */
-        void rotate(double theta){
+        void rotate(long double theta){
             *this = rotated(theta);
         }
 
@@ -137,9 +137,9 @@ class PhysicalVector{
 
         /**
          * Scale a vector by a factor
-         * @param factor a double
+         * @param factor a long double
          */
-        PhysicalVector operator * (double factor){
+        PhysicalVector operator * (long double factor){
             return PhysicalVector(x * factor, y * factor);
         }
 
@@ -163,9 +163,9 @@ class PhysicalVector{
 
         /**
          * Scale a vector by a factor
-         * @param factor a double
+         * @param factor a long double
          */
-        PhysicalVector operator *= (double factor){
+        PhysicalVector operator *= (long double factor){
             return ((*this) = (*this) * factor);
         }
 };
