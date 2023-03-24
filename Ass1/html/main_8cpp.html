@@ -423,28 +423,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Main function </p>
-<p>A list of all vertices</p>
-<p>No. of vertices</p>
-<p>Variables to take vertex coordinates as input</p>
-<p>Taking vertex coordinate information in order of edges of initial polygon</p>
-<p>Making the initial Polygon in <a class="el" href="classDCEL.html">DCEL</a></p>
-<p>A vector to store all the decomposed polygons</p>
-<p>A list of diagonals added to the polynomial</p>
-<p>Last vertex in remaining vertex list assigned v1</p>
-<p>The vertex next to v1 in the polynomial</p>
-<p>Adding the 2 vertices to the current convex polygon list</p>
-<p>Until the polygon covers all vertices. Check angle between (i-1)th,ith and (i+1)th vertex is Reflex.Check angle between ith, (i+1)th and 1st vertex is Reflex. Check angle between (i+1)th, 1st and 2nd vertex is Reflex. If one of the conditions is true then,the point cannot be added to current convex polygon.</p>
-<p>List of notches. Notches being vertices of polygon with reflexive inner angle.</p>
-<p>Adds vertex to notchlist if the vertex,it's previous and it's next form a reflexive angle.</p>
-<p>List of notches in the polygon not part of L[m]</p>
-<p>Check if the notch is a part of L[m]</p>
-<p>Check if the notch is a part of the smallest rectangle containing all vertices of L[m]. This acts as a preliminary check for a a notch being interior. As a definite check to the notch being in the interior of the <a class="el" href="classDCEL.html">DCEL</a>, we check if the notch tmp from LPVS is in the interior of the triangle formed by the 1st, (n - 1) th and nth vertex using the function isInterior for the vertices. If inside, we reduce the size of the <a class="el" href="classDCEL.html">DCEL</a> until the notch is thrown out. This is done for all notches in the LPVS list.</p>
-<p>&lt; Checking if the polygon contains only 2 vertices</p>
-<p>&lt; Splitting a face wrt 2 edges</p>
-<p>&lt; Adding this newly formed diagonal to the list of diagonals</p>
-<p>The original algorithm for merging states 3 conditions to check and proceed with the merging process. These 3 conditions are handled by the definition of <a class="el" href="classDCEL.html">DCEL</a> as it encapsulates adjacency information. Hence the only super-condition to be checked is whether the vertices of the merged polygon would be non-reflex. We iterate through the list of diagonals and perform this check.</p>
-<p>Print the individual polygon <a class="el" href="classDCEL.html">DCEL</a> vertices using the printDCEL function.</p>
+<p>Main function The main function is an aggregation of all the functions and classes defined. We declare a list of vertices called vlist. We populate vlist with the given input, handling duplicates on the fly. With this vlist, we populate the <a class="el" href="classDCEL.html">DCEL</a>. Additionally, we declare a vector of vector of vertices called L to store all the decomposed polygons, and a list of edges to store diagonals. Until the polygon covers all vertices. Check angle between (i-1)th,ith and (i+1)th vertex is Reflex. Check angle between ith, (i+1)th and 1st vertex is Reflex. Check angle between (i+1)th, 1st and 2nd vertex is Reflex. If one of the conditions is true then, the point cannot be added to current convex polygon. We use a list of vertices to store all the notches, which adds vertex to notchlist if the vertex, it's previous and it's next form a reflexive angle. We check if the notch is a part of the smallest rectangle containing all vertices of L[m]. This acts as a preliminary check for a notch being interior. As a definite check to the notch being in the interior of the <a class="el" href="classDCEL.html">DCEL</a>, we check if the notch tmp from LPVS is in the interior of the triangle formed by the 1st, (n - 1) th and nth vertex using the function isInterior for the vertices. If inside, we reduce the size of the <a class="el" href="classDCEL.html">DCEL</a> until the notch is thrown out. This is done for all notches in the LPVS list. We perform a check for the polygon, to see whether there are only two vertices left. If not, we split the face, removing it from the main polygon, and adding a newly formed egde to the list of diagonals. The original algorithm for merging states 3 conditions to check and proceed with the merging process. These 3 conditions are handled by the definition of <a class="el" href="classDCEL.html">DCEL</a> as it encapsulates adjacency information. Hence the only super-condition to be checked is whether the vertices of the merged polygon would be non-reflex. We iterate through the list of diagonals and perform this check. </p>
 
 </div>
 </div>

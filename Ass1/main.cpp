@@ -1,3 +1,11 @@
+/*
+    Team Members:
+    Kushagra Verma - 2020A7PS0225H
+    Arkishman Ghosh - 2020A7PS2077H
+    Moksh Papneja - 2020A7PS2074H
+    Sriram Balasubramanian - 2020A7PS0002H
+*/
+
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -194,7 +202,7 @@ int main(int argc, char *argv[]) {
     int n; // No. of vertices
     long double x, y; // Variables to take vertex coordinates as input
     fin >> n;
-    /** Taking vertex coordinate information in order of edges of initial polygon */
+    /* Taking vertex coordinate information in order of edges of initial polygon */
     set<pair<long double,long double> > unq;
     for (int i = 0; i < n; i++) {
         fin >> x >> y; 
