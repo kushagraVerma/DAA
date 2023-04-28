@@ -54,30 +54,24 @@ long double optimalLines(vector<vector<long double>>& lineCost, int C, int j){
 
 long double optimalLinesIterative(vector<vector<long double>>& lineCost, int C, int j){
 
-    int n = j + 1;
-    vector<int> segments(n);
-
-    dp[0] = 0;
-
-    for(int i = 1; i < n; i++){
-        long double answer = LONG_MAX;
-        int idx;
-
-        for(int k = 0; k < i; k++){
-            long double temp = min(answer, lineCost[k][i-1] + C + dp[k]);
-            if (temp < answer){
-                idx = k;
-                answer = temp;
+    for(int i = 0; i <= j; i++) {
+        for(int k = 0; k <= i; k++) {
+            long double temp = (k == 0 ? 0 : dp[k - 1]) + lineCost[k][i] + C;
+            if(temp < dp[i]) {
+                dp[i] = temp;
+                segments[i] = k;
             }
         }
+    }
 
-        dp[i] = answer;
-        segments[i] = idx;
+    int idx = j;
+    while(idx >= 0) {
+        idx = segments[idx] - 1;
+        segments[idx + 1] = idx;
     }
 
     return dp[j];
 }
-
 
 int main(){
 
@@ -106,7 +100,7 @@ int main(){
 
     dp.assign(n, LONG_MAX);
     segments.assign(n, -1);
-    optimalLinesIterative(lineCost, C, n - 1);
+    optimalLines(lineCost, C, n - 1);
 
     cout << dp[n - 1] << endl;
     int idx = n - 1;
