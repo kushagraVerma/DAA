@@ -1,11 +1,12 @@
 #include<vector>
 #include<iostream>
 #include<algorithm>
+#include<climits>
 
 using namespace std;
 
 vector<long double> dp;
-vector<int> segments;
+vector<long double> segments;
 
 vector<long double> computeCost(vector<pair<long double, long double>> &points, int i, int j){
 
@@ -51,6 +52,33 @@ long double optimalLines(vector<vector<long double>>& lineCost, int C, int j){
     return dp[j] = answer;
 }
 
+long double optimalLinesIterative(vector<vector<long double>>& lineCost, int C, int j){
+
+    int n = j + 1;
+    vector<int> segments(n);
+
+    dp[0] = 0;
+
+    for(int i = 1; i < n; i++){
+        long double answer = LONG_MAX;
+        int idx;
+
+        for(int k = 0; k < i; k++){
+            long double temp = min(answer, lineCost[k][i-1] + C + dp[k]);
+            if (temp < answer){
+                idx = k;
+                answer = temp;
+            }
+        }
+
+        dp[i] = answer;
+        segments[i] = idx;
+    }
+
+    return dp[j];
+}
+
+
 int main(){
 
     int n, C;
@@ -78,16 +106,23 @@ int main(){
 
     dp.assign(n, LONG_MAX);
     segments.assign(n, -1);
-    optimalLines(lineCost, C, n - 1);
+    optimalLinesIterative(lineCost, C, n - 1);
 
     cout << dp[n - 1] << endl;
     int idx = n - 1;
-    vector<int> pts;
+    vector<long double> pts;
+
+    vector<vector<long double>> slopeIntercept;
 
     while(segments[idx] > 0){
         pts.push_back(segments[idx]);
+        slopeIntercept.push_back({a[segments[idx]][idx], b[segments[idx]][idx]});
         idx = segments[idx] - 1;
     }
+
+    slopeIntercept.push_back({a[0][idx], b[0][idx]});
+
+    reverse(slopeIntercept.begin(), slopeIntercept.end());
 
     vector<vector<pair<long double, long double>>> lines(pts.size() + 1, vector<pair<long double, long double>>());
     int x = n - 1;
@@ -107,6 +142,7 @@ int main(){
         for(int j = 0; j < lines[i].size(); j++){
             cout << '(' << lines[i][j].first << ',' << lines[i][j].second << ')';
         }
+        cout << " " << slopeIntercept[i][0] << " " << slopeIntercept[i][1];
         cout << endl;
     }
 }
