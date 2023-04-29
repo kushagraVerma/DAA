@@ -2,8 +2,10 @@
 #include<iostream>
 #include<algorithm>
 #include<climits>
+#include<chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 vector<long double> dp;
 vector<long double> segments;
@@ -75,14 +77,18 @@ long double optimalLinesIterative(vector<vector<long double>>& lineCost, int C, 
 
 int main(){
 
-    int n, C;
-    cin >> n >> C;
+    int n, C, option;
+    cin >> n >> C >> option;
 
     vector<pair<long double, long double>> points(n);
     for(int i = 0; i < n; i++){
         cin >> points[i].first >> points[i].second;
     }
 
+    time_point<high_resolution_clock> start, stop;
+    microseconds duration;
+
+    start = high_resolution_clock::now();
     sort(points.begin(), points.end());
     
     vector<vector<long double>> a(n, vector<long double>(n));
@@ -100,7 +106,10 @@ int main(){
 
     dp.assign(n, LONG_MAX);
     segments.assign(n, -1);
-    optimalLines(lineCost, C, n - 1);
+    if (option)
+        optimalLines(lineCost, C, n - 1);
+    else
+        optimalLinesIterative(lineCost, C, n - 1);
 
     cout << dp[n - 1] << endl;
     int idx = n - 1;
@@ -132,6 +141,9 @@ int main(){
     }
     reverse(lines.begin(), lines.end());
 
+    stop = high_resolution_clock::now();
+    duration = duration_cast<microseconds>(stop - start);
+
     for(int i = 0; i < lines.size(); i++){
         for(int j = 0; j < lines[i].size(); j++){
             cout << '(' << lines[i][j].first << ',' << lines[i][j].second << ')';
@@ -139,4 +151,6 @@ int main(){
         cout << " " << slopeIntercept[i][0] << " " << slopeIntercept[i][1];
         cout << endl;
     }
+
+    cout << "Time taken by the algorithm (in microseconds): " << duration.count() << endl;
 }
