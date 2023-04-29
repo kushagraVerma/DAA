@@ -1,0 +1,7 @@
+The max flow of the network: 28
+No. of edges in the min s-t cut: 3
+Edges in the min s-t cut:
+1-2
+3-6
+7-8
+Total time for execution excluding printing: 110 µs

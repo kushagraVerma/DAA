@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "timer.hpp"
 #define int long long int
 using namespace std;
 
@@ -93,7 +94,7 @@ int32_t main() {
     cin >> source >> sink;
     source--;
     sink--;
-    
+    Timer timer = Timer();
     int flow = 0;
     while (1)
     {
@@ -115,6 +116,8 @@ int32_t main() {
             flowGraph[path[i]][path[i+1]] += bottleneck;
         }
     }
+
+
     cout << "The max flow of the network: " << flow << endl;
     
     // Finding the min s-t cut for the graph
@@ -129,11 +132,13 @@ int32_t main() {
             if (visited[i] && !visited[j] && originalGraph[i][j]) cutEdges.push_back({i, j});
         }
     }
-    // cout << "No. of edges in the min s-t cut: " << cutEdges.size() << endl;
+    timer.stopClock();
+    cout << "No. of edges in the min s-t cut: " << cutEdges.size() << endl;
     cout << "Edges in the min s-t cut:" << endl;
     for (int i = 0; i < cutEdges.size(); i++)
     {
         cout << cutEdges[i].first + 1 << "-" << cutEdges[i].second + 1 << endl;
     }
+    cout << "Total time for execution excluding printing: " << timer.getDuration() << " µs" << endl;
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "timer.hpp"
 #define int long long int
 using namespace std;
 
@@ -12,21 +13,27 @@ vector<int> partitionGraph(int n, vector<vector<int>> &graph) {
     vector<int> partition(n);
     vector<int> visited(n);
     queue<int> q;
-    q.push(0);
-    partition[0] = 1;
-    visited[0] = 1;
-    while (!q.empty())
+    for (int j = 0; j < n; j++)
     {
-        int k = q.front();
-        visited[k] = 1;
-        q.pop();
-        for (int i = 0; i < graph[k].size(); i++)
+        if (!visited[j])
         {
-            if (!visited[i] && graph[k][i])
+            q.push(j);
+            partition[j] = 1;
+            visited[j] = 1;
+            while (!q.empty())
             {
-                q.push(i);
-                partition[i] = 3 - partition[k];
-                visited[i] = 1;
+                int k = q.front();
+                visited[k] = 1;
+                q.pop();
+                for (int i = 0; i < graph[k].size(); i++)
+                {
+                    if (!visited[i] && graph[k][i])
+                    {
+                        q.push(i);
+                        partition[i] = 3 - partition[k];
+                        visited[i] = 1;
+                    }
+                }
             }
         }
     }
@@ -86,6 +93,7 @@ int32_t main() {
         adjList[a][b] = 1;
         adjList[b][a] = 1;
     }
+    Timer timer = Timer();
     vector<int> partition = partitionGraph(n, adjList);
     vector<int> partition1, partition2; // Splitting the vertices into two sets
     for (int i = 0; i < partition.size(); i++)
@@ -135,7 +143,17 @@ int32_t main() {
         flowGraph[0][i] = 0;
         flowGraph[i][n + 1] = 0;
     }
-    
+
+    int edgeCount = 0;
+    for (int i = 0; i < partition2.size(); i++)
+    {
+        for (int j = 0; j < partition1.size(); j++)
+        {
+            if (residualGraph[partition2[i]][partition1[j]]) edgeCount++;
+        }
+    }
+    timer.stopClock();
+    cout << "No. of edges in the maximum bipartite matching are: " << edgeCount << endl;
     cout << "The edges part of the maximum bipartite matching are:" << endl;
     for (int i = 0; i < partition2.size(); i++)
     {
@@ -146,7 +164,6 @@ int32_t main() {
                 cout << partition1[j] << "-" << partition2[i] << endl;
             }
         }
-        
     }
-    
+    cout << "Total time for execution excluding printing: " << timer.getDuration() << " µs" << endl;
 }

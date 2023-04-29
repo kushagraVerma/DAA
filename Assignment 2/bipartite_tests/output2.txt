@@ -1,0 +1,28 @@
+No. of edges in the maximum bipartite matching are: 25
+The edges part of the maximum bipartite matching are:
+25-26
+1-27
+4-28
+3-29
+6-30
+5-31
+8-32
+7-33
+10-34
+9-35
+12-36
+11-37
+14-38
+13-39
+16-40
+15-41
+18-42
+17-43
+20-44
+19-45
+22-46
+21-47
+24-48
+23-49
+2-50
+Total time for execution excluding printing: 1414 µs
