@@ -1,0 +1,74 @@
+\hypertarget{BipartiteMatching_8cpp}{}\doxysection{Bipartite\+Matching.\+cpp File Reference}
+\label{BipartiteMatching_8cpp}\index{BipartiteMatching.cpp@{BipartiteMatching.cpp}}
+{\ttfamily \#include $<$bits/stdc++.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}timer.\+hpp\char`\"{}}\newline
+Include dependency graph for Bipartite\+Matching.\+cpp\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{BipartiteMatching_8cpp_ae88a82478e3818cade3f598c25437904}{int}}~long long int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$ \mbox{\hyperlink{BipartiteMatching_8cpp_ab247d0630bd9f7c2a17da35d7ccf4dcf}{partition\+Graph}} (\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} n, vector$<$ vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$$>$ \&graph)
+\item 
+vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$ \mbox{\hyperlink{BipartiteMatching_8cpp_a90f88fa3dacacdefc3ff3fa449d2a413}{find\+Path}} (\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} n, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} source, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} sink, vector$<$ vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$$>$ \&residual\+Graph)
+\item 
+int32\+\_\+t \mbox{\hyperlink{BipartiteMatching_8cpp_a196718f834091385d38586a0ce4009dc}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{BipartiteMatching_8cpp_ae88a82478e3818cade3f598c25437904}\label{BipartiteMatching_8cpp_ae88a82478e3818cade3f598c25437904}} 
+\index{BipartiteMatching.cpp@{BipartiteMatching.cpp}!int@{int}}
+\index{int@{int}!BipartiteMatching.cpp@{BipartiteMatching.cpp}}
+\doxysubsubsection{\texorpdfstring{int}{int}}
+{\footnotesize\ttfamily \#define int~long long int}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{BipartiteMatching_8cpp_a90f88fa3dacacdefc3ff3fa449d2a413}\label{BipartiteMatching_8cpp_a90f88fa3dacacdefc3ff3fa449d2a413}} 
+\index{BipartiteMatching.cpp@{BipartiteMatching.cpp}!findPath@{findPath}}
+\index{findPath@{findPath}!BipartiteMatching.cpp@{BipartiteMatching.cpp}}
+\doxysubsubsection{\texorpdfstring{findPath()}{findPath()}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}$>$ find\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{n,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{source,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{sink,  }\item[{vector$<$ vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$$>$ \&}]{residual\+Graph }\end{DoxyParamCaption})}
+
+Finds a path between a source and a sink in a residual graph 
+\begin{DoxyParams}{Parameters}
+{\em n} & number of vertices \\
+\hline
+{\em source} & source vertex number \\
+\hline
+{\em sink} & sink vertex number \\
+\hline
+{\em residual\+Graph} & a residual graph in adjacency matrix format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector containing vertices along the source-\/sink path 
+\end{DoxyReturn}
+\mbox{\Hypertarget{BipartiteMatching_8cpp_a196718f834091385d38586a0ce4009dc}\label{BipartiteMatching_8cpp_a196718f834091385d38586a0ce4009dc}} 
+\index{BipartiteMatching.cpp@{BipartiteMatching.cpp}!main@{main}}
+\index{main@{main}!BipartiteMatching.cpp@{BipartiteMatching.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int32\+\_\+t main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{BipartiteMatching_8cpp_ab247d0630bd9f7c2a17da35d7ccf4dcf}\label{BipartiteMatching_8cpp_ab247d0630bd9f7c2a17da35d7ccf4dcf}} 
+\index{BipartiteMatching.cpp@{BipartiteMatching.cpp}!partitionGraph@{partitionGraph}}
+\index{partitionGraph@{partitionGraph}!BipartiteMatching.cpp@{BipartiteMatching.cpp}}
+\doxysubsubsection{\texorpdfstring{partitionGraph()}{partitionGraph()}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}$>$ partition\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{n,  }\item[{vector$<$ vector$<$ \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} $>$$>$ \&}]{graph }\end{DoxyParamCaption})}
+
+Partitions a bipartite graph into two vertex sets 
+\begin{DoxyParams}{Parameters}
+{\em n} & number of vertices \\
+\hline
+{\em graph} & a graph in adjacency matrix format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector that gives the partition set number of every vertex 
+\end{DoxyReturn}

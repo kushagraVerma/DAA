@@ -1,0 +1,105 @@
+\hypertarget{lineFitting_8cpp}{}\doxysection{line\+Fitting.\+cpp File Reference}
+\label{lineFitting_8cpp}\index{lineFitting.cpp@{lineFitting.cpp}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+Include dependency graph for line\+Fitting.\+cpp\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ long double $>$ \mbox{\hyperlink{lineFitting_8cpp_a93e66feec8648e1bf779065cf600b5e1}{compute\+Cost}} (vector$<$ pair$<$ long double, long double $>$$>$ \&points, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} i, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} j)
+\item 
+long double \mbox{\hyperlink{lineFitting_8cpp_a7b92f4bd1089607049b95c9be57c7852}{optimal\+Lines}} (vector$<$ vector$<$ long double $>$$>$ \&line\+Cost, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} C, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} j)
+\item 
+long double \mbox{\hyperlink{lineFitting_8cpp_ad5eca182fc36b9faea6c775330decfbb}{optimal\+Lines\+Iterative}} (vector$<$ vector$<$ long double $>$$>$ \&line\+Cost, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} C, \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} j)
+\item 
+\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} \mbox{\hyperlink{lineFitting_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ long double $>$ \mbox{\hyperlink{lineFitting_8cpp_a1fbdc458903bf28acb5733fa9602d44f}{dp}}
+\item 
+vector$<$ long double $>$ \mbox{\hyperlink{lineFitting_8cpp_a96b5b4a892782480edbc9ce7101e7c08}{segments}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{lineFitting_8cpp_a93e66feec8648e1bf779065cf600b5e1}\label{lineFitting_8cpp_a93e66feec8648e1bf779065cf600b5e1}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!computeCost@{computeCost}}
+\index{computeCost@{computeCost}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{computeCost()}{computeCost()}}
+{\footnotesize\ttfamily vector$<$long double$>$ compute\+Cost (\begin{DoxyParamCaption}\item[{vector$<$ pair$<$ long double, long double $>$$>$ \&}]{points,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{i,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{j }\end{DoxyParamCaption})}
+
+Pre processing function to calculate slope and intercept of given points and then compute the sum of squares of deviation of the predicted value of the ordinate from its true value (cost) 
+\begin{DoxyParams}{Parameters}
+{\em points} & a vector of pair of coordinates \\
+\hline
+{\em i} & index of the first point in points vector \\
+\hline
+{\em j} & index of the second point in points vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector containing the slope, intercept and the cost 
+\end{DoxyReturn}
+\mbox{\Hypertarget{lineFitting_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{lineFitting_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!main@{main}}
+\index{main@{main}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}} main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Main function Input is taken as number of points, penalty of adding a line segment, and \textquotesingle{}option\textquotesingle{} (which indicates whether the iterative or recursive version should be called), followed by the given number of coordinate pairs. The input points are sorted by abscissa and then ordinate to resolve clashes. Next, costs are computed for the best fit lines of all contiguous subsets of points. Now, the segments array is set according to either the iterative or the recursive version of the algorithm. Finally, the slope intercepts and lines array are filled according to the segments array \mbox{\Hypertarget{lineFitting_8cpp_a7b92f4bd1089607049b95c9be57c7852}\label{lineFitting_8cpp_a7b92f4bd1089607049b95c9be57c7852}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!optimalLines@{optimalLines}}
+\index{optimalLines@{optimalLines}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{optimalLines()}{optimalLines()}}
+{\footnotesize\ttfamily long double optimal\+Lines (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ long double $>$$>$ \&}]{line\+Cost,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{C,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{j }\end{DoxyParamCaption})}
+
+Recursive function with memoization to find minimum cumulative cost uptil a point and decide whether it should be a part of the current line or whether a new line should be added. Additionally maintains a segment array to indicate which point belongs to what line by following a parent-\/child relationship where the parent is the point where the new line was added. 
+\begin{DoxyParams}{Parameters}
+{\em line\+Cost} & 2D vector containing the cost for a line going from point i to j \\
+\hline
+{\em C} & penalty for adding a new line \\
+\hline
+{\em j} & index upto which the lines have been added \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+long double value indicating the total cost upto point j 
+\end{DoxyReturn}
+\mbox{\Hypertarget{lineFitting_8cpp_ad5eca182fc36b9faea6c775330decfbb}\label{lineFitting_8cpp_ad5eca182fc36b9faea6c775330decfbb}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!optimalLinesIterative@{optimalLinesIterative}}
+\index{optimalLinesIterative@{optimalLinesIterative}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{optimalLinesIterative()}{optimalLinesIterative()}}
+{\footnotesize\ttfamily long double optimal\+Lines\+Iterative (\begin{DoxyParamCaption}\item[{vector$<$ vector$<$ long double $>$$>$ \&}]{line\+Cost,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{C,  }\item[{\mbox{\hyperlink{Ford-Fulkerson_8cpp_ae88a82478e3818cade3f598c25437904}{int}}}]{j }\end{DoxyParamCaption})}
+
+Iterative function to find minimum cumulative cost uptil a point and decide whether it should be a part of the current line or whether a new line should be added. Additionally maintains a segment array to indicate which point belongs to what line by following a parent-\/child relationship where the parent is the point where the new line was added. 
+\begin{DoxyParams}{Parameters}
+{\em line\+Cost} & 2D vector containing the cost for a line going from point i to j \\
+\hline
+{\em C} & penalty for adding a new line \\
+\hline
+{\em j} & index upto which the lines have been added \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+long double value indicating the total cost upto point j 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{lineFitting_8cpp_a1fbdc458903bf28acb5733fa9602d44f}\label{lineFitting_8cpp_a1fbdc458903bf28acb5733fa9602d44f}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!dp@{dp}}
+\index{dp@{dp}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{dp}{dp}}
+{\footnotesize\ttfamily vector$<$long double$>$ dp}
+
+\mbox{\Hypertarget{lineFitting_8cpp_a96b5b4a892782480edbc9ce7101e7c08}\label{lineFitting_8cpp_a96b5b4a892782480edbc9ce7101e7c08}} 
+\index{lineFitting.cpp@{lineFitting.cpp}!segments@{segments}}
+\index{segments@{segments}!lineFitting.cpp@{lineFitting.cpp}}
+\doxysubsubsection{\texorpdfstring{segments}{segments}}
+{\footnotesize\ttfamily vector$<$long double$>$ segments}
+
