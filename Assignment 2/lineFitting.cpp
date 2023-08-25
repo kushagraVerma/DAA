@@ -37,6 +37,11 @@ vector<long double> computeCost(vector<pair<long double, long double>> &points, 
         xSquareSum += (points[k].first * points[k].first);
     }
 
+    /*
+    a = (n*sum(xi*yi) - sum(xi)*sum(yi))/(n*sum(xi*xi) - sum(xi)*sum(xi))
+    b = (sum(yi) - a*sum(xi))/n
+    */
+
     long double a = ((n * productSum) - (xSum * ySum)) / ((n * xSquareSum) - (xSum * xSum));
     long double b = (ySum - (a * xSum)) / n;
 
